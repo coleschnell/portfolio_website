@@ -114,7 +114,7 @@
         <div bind:clientWidth={width}>
             <img
             class="{pc ? 'browser-border' : 'phone-border'}"
-            src="{pc ? image.pc : image.mobile}" alt="">
+            src="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/{pc ? image.pc : image.mobile}" alt="texrt">
         </div>
 
     </div>

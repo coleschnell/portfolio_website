@@ -101,7 +101,7 @@
         </div>
 
         <div class="images">
-            <img src="src\routes\_assets\cole.jpg" alt="Cole Schnell">
+            <img src="https://github.com/cdemon12/portfolio_website/blob/main/src/routes/_assets/cole.jpg?raw=true" alt="Cole Schnell">
         </div>
 
     </div>
