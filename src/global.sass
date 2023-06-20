@@ -1,0 +1,74 @@
+
+*
+    margin: 0
+    padding: 0
+    font-family: 'Josefin Sans', sans-serif
+    line-height: 1.5rem
+
+
+h1
+    font-size: 3rem
+    font-family: 'Josefin Sans', sans-serif
+    color: #17202A
+    line-height: 3rem
+
+h2
+    font-size: 1.5rem
+    font-family: 'Josefin Sans', sans-serif
+    color: #17202A
+
+a
+    text-decoration: none
+    color: #17202A
+    &:hover
+        text-decoration: underline
+
+img
+    max-width: 300px
+    object-fit: cover
+    object-position: center
+
+.flex
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 10px    
+
+button
+    padding: 10px 20px
+    border: 2px solid #17202A
+    background-color: rgba(0, 0, 0, 0)
+    cursor: pointer
+    border-radius: 3px
+    height: 40px
+    color: black
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover
+        background-color: #1B2631
+        color: white
+    &.first
+        border-radius: 5px 2px 2px 5px
+    &.last
+        border-radius: 2px 5px 5px 2px
+    &.active
+        color: white
+        background-color: #17202A
+
+ion-icon
+    visibility: visible
+    font-size: 1.5rem
+    transition: all 0.3s ease-in-out
+    &:hover
+        color: white
+        transform: scale(1.1)
+        transition: all 0.3s ease-in-out
+
+.browser-border, .phone-border
+    border: 2px solid #17202A
+    border-top: none
+    border-radius: 0 0 5px 5px
+    padding: 0
+
+
