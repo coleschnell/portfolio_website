@@ -97,8 +97,8 @@
 
         <div class="images">
             <picture>
-                <source type="image/webp" srcset="src\routes\_assets\cole.webp">
-                <source type="image/jpeg" srcset="src\routes\_assets\cole.jpg">
+                <source type="image/webp" srcset="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/src/routes/_assets/cole.webp">
+                <source type="image/jpeg" srcset="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/src/routes/_assets/cole.jpg">
                 <img src="src\routes\_assets\cole.jpg" alt="Cole Schnell">
             </picture>
         </div>
@@ -255,7 +255,7 @@
         flex-direction: column
         justify-content: center
         align-items: center
-        padding: 50px 0 0 0
+        padding: 150px 0 0 0
         height: max(160vh, 1400px)
         h1
             grid-area: title

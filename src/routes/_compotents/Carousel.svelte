@@ -114,8 +114,8 @@
         <div bind:clientWidth={width}>
             <picture
             >
-                <source type="image/webp" srcset="{pc ? image.pc : image.mobile}.webp">
-                <source type="image/jpeg" srcset="{pc ? image.pc : image.mobile}.jpg">
+                <source type="image/webp" srcset="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/{pc ? image.pc : image.mobile}.webp">
+                <source type="image/jpeg" srcset="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/{pc ? image.pc : image.mobile}.jpg">
                 <img class="{pc ? 'browser-border' : 'phone-border'}" src="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/{pc ? image.pc : image.mobile}.jpg" alt="Cole Schnell">
             </picture>
         </div>

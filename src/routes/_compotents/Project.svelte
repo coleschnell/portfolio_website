@@ -65,7 +65,7 @@
         grid-template-columns: 1fr 1fr 50px
         grid-template-rows: 50px 1fr
         grid-template-areas: "words buttons nothing" "words carosel carosel"
-        padding: 100px 0 0 0
+        padding: 50px 0 0 0
         height: max(1000px, 80vh)
         .words
             grid-area: words
