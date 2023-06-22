@@ -11,12 +11,16 @@
     $: current_image = images[i]
 
     let width;
+    let docWidth;
 
     let direction = "down";
 
     export let address = "lostinbuckeye.com"
 
 </script>
+
+<svelte:window bind:innerWidth={docWidth} />
+
 <div class="body">
 
 <div class="buttons flex">
@@ -55,7 +59,7 @@
     >
         {#if pc}
         <ul class="browser"
-        style="width: {width -4}px;"
+        style="width: {docWidth > 800 ? width -4 : width}px;"
         >
             <li>
                 <span class="material-symbols-outlined">
@@ -92,7 +96,7 @@
 
         {#if !pc}
         <ul class="mobile browser"
-        style="width: {width -4}px;"
+        style="width: {docWidth > 800 ? width -4 : width}px;"
         >
             <li>
                 <span class="material-symbols-outlined">
@@ -217,6 +221,7 @@
         grid-template-rows: 1fr
         grid-template-areas: "image buttons"
         margin: 0 10px
+        width: calc(100% - 20px)
     .image
         max-width: 80%
         max-height: 50vh
@@ -227,7 +232,8 @@
                 object-fit: cover
                 margin: 0
                 padding: 0
-
+    .browser
+        transform: translateX(2px)
 
 
 
