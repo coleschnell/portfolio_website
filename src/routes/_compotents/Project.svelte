@@ -46,7 +46,7 @@
 
 </div>
 
-<div class="carosel flex">
+<div class="carousel flex">
 
     <Carousel 
     pc = {computer}
@@ -64,7 +64,7 @@
         display: grid
         grid-template-columns: 1fr 1fr 50px
         grid-template-rows: 50px 1fr
-        grid-template-areas: "words buttons nothing" "words carosel carosel"
+        grid-template-areas: "words buttons nothing" "words carousel carousel"
         padding: 50px 0 0 0
         height: max(1000px, 80vh)
         .words
@@ -95,8 +95,8 @@
             justify-content: center
             align-items: center
             gap: 1px
-        .carosel
-            grid-area: carosel
+        .carousel
+            grid-area: carousel
 
 @media (max-width: 800px)
     .container

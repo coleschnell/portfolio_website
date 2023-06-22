@@ -166,6 +166,7 @@
         flex-direction: column
         justify-content: center
         align-items: center
+        transform: translateX(2px)
         picture
             img
                 max-width: 500px
