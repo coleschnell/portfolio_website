@@ -144,6 +144,7 @@
         grid-template-rows: 1fr
         grid-template-areas: "image buttons"
         width: 550px
+        overflow: hidden
 
 
 

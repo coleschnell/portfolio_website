@@ -19,7 +19,7 @@
     ]);
 
     const setJob = function(zerosum = true) {
-        const jobs = ["Frontend Developer", "Data Journalist", "Reporter", "Economics Explainer", "Web Developer", "Data Visualizer", "Writer", "Computional Journalist"];
+        const jobs = ["Frontend Developer", "Data Journalist", "Reporter", "Economics Communicator", "Web Developer", "Writer", "Computional Journalist"];
         setTimeout(() => {
             zerosum = !zerosum;
 
@@ -315,6 +315,11 @@
         gap: 0px
         height: 100vh
 
+    .left, .right
+        height: 50%
+        width: 80%
+
+
     .left
         position: sticky
         align-items: end
@@ -333,6 +338,7 @@
     
     #contact
         flex-direction: column
+        padding-top: 150px
         .words
             width: 90%
 

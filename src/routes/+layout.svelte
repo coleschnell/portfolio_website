@@ -1,10 +1,8 @@
 <script>
     import Nav from "./_compotents/Nav.svelte";
     import Footer from "./_compotents/Footer.svelte";
-
 </script>
 
-   
 <div class="body">
 
     <Nav />
@@ -35,6 +33,7 @@
         top: 0
         left: 0
         background-image: linear-gradient(to bottom right, #F9E79F, #6C3483)
+        overflow: hidden
 
     article
         grid-area: main
