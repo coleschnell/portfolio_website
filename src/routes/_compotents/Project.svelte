@@ -63,7 +63,7 @@
     .container
         display: grid
         grid-template-columns: 1fr 1fr 50px
-        grid-template-rows: 50px 1fr
+        grid-template-rows: 70px 1fr
         grid-template-areas: "words buttons nothing" "words carousel carousel"
         padding: 50px 0 0 0
         height: max(1000px, 80vh)
@@ -97,6 +97,11 @@
             gap: 1px
         .carousel
             grid-area: carousel
+            display: flex
+            flex-direction: column
+            justify-content: start
+            align-items: center
+
 
 @media (max-width: 800px)
     .container
