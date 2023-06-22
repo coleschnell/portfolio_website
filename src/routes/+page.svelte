@@ -119,7 +119,7 @@
         <h1>Projects</h1>
 
         <Project 
-        address = {"lostinbuckeye.com"}
+        address = {"https://lostinbuckeye.com"}
         images = {[{mobile:"src/routes/_assets/detour_phone_1", pc:"src/routes/_assets/detour_pc_1"}, {mobile:"src/routes/_assets/detour_phone_2", pc:"src/routes/_assets/detour_pc_2"}]}
         title={"Lost in Buckeye"}
         description={["Developed website for group reporting project on missing persons.","Scraped years of data from PDFs and HTML tables.","Analyzed the data and built an interactive dashboard."]}
@@ -127,7 +127,7 @@
         />
 
         <Project
-        address={"columbiamissourian.vercel.app/missouri-syphilis-dashboard/"}
+        address={"https://columbiamissourian.vercel.app/missouri-syphilis-dashboard/"}
         images = {[{mobile:"src/routes/_assets/syphilis_phone_1", pc:"src/routes/_assets/syphilis_pc_1"}, {mobile:"src/routes/_assets/syphilis_phone_2", pc:"src/routes/_assets/syphilis_pc_2"}]}
         title={"Syphilis in Missouri: A scroll through seven years of data"}
         description={["A data visualization project that explores the rise of syphilis in Missouri from 2015 to 2022."]}
