@@ -66,7 +66,7 @@
         grid-template-rows: 50px 1fr
         grid-template-areas: "words buttons nothing" "words carosel carosel"
         padding: 100px 0 0 0
-        height: 80vh
+        height: max(1000px, 80vh)
         .words
             grid-area: words
             display: flex
@@ -97,8 +97,17 @@
             gap: 1px
         .carosel
             grid-area: carosel
-            height: 500px
 
-
+@media (max-width: 800px)
+    .container
+            display: flex
+            flex-direction: column
+            justify-content: start
+            align-items: center
+            gap: 10px
+            padding: 30px 0 0 0
+            .words
+                padding: 0
+                width: 100%
 
 </style>

@@ -55,7 +55,7 @@
     >
         {#if pc}
         <ul class="browser"
-        style="width: {width - 4}px;"
+        style="width: {width -4}px;"
         >
             <li>
                 <span class="material-symbols-outlined">
@@ -92,7 +92,7 @@
 
         {#if !pc}
         <ul class="mobile browser"
-        style="width: {width - 4}px;"
+        style="width: {width -4}px;"
         >
             <li>
                 <span class="material-symbols-outlined">
@@ -112,9 +112,12 @@
         {/if}
 
         <div bind:clientWidth={width}>
-            <img
-            class="{pc ? 'browser-border' : 'phone-border'}"
-            src="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/{pc ? image.pc : image.mobile}" alt="texrt">
+            <picture
+            >
+                <source type="image/webp" srcset="{pc ? image.pc : image.mobile}.webp">
+                <source type="image/jpeg" srcset="{pc ? image.pc : image.mobile}.jpg">
+                <img class="{pc ? 'browser-border' : 'phone-border'}" src="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/{pc ? image.pc : image.mobile}.jpg" alt="Cole Schnell">
+            </picture>
         </div>
 
     </div>
@@ -136,6 +139,7 @@
         grid-template-columns: 500px 50px
         grid-template-rows: 1fr
         grid-template-areas: "image buttons"
+        width: 550px
 
 
 
@@ -157,17 +161,18 @@
         flex-direction: column
         justify-content: center
         align-items: center
-        img
-            max-width: 500px
-            max-height: 400px
-            object-fit: cover
-            margin: 0
-            padding: 0
+        picture
+            img
+                max-width: 500px
+                max-height: 500px
+                object-fit: cover
+                margin: 0
+                padding: 0
 
 
     .browser
         height: 20px
-        width: calc(100% - 1px)
+        width: 100%
         border-radius: 5px 5px 0 0
         border: 2px solid #000
         list-style: none
@@ -205,7 +210,23 @@
             justify-content: start
             
 
-            
+@media (max-width: 800px)
+    .body
+        display: grid
+        grid-template-columns: 1fr 50px
+        grid-template-rows: 1fr
+        grid-template-areas: "image buttons"
+        margin: 0 10px
+    .image
+        max-width: 80%
+        max-height: 50vh
+        picture
+            img
+                max-width: 100%
+                max-height: 50vh
+                object-fit: cover
+                margin: 0
+                padding: 0
 
 
 
