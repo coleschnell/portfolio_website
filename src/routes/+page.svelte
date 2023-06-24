@@ -1,11 +1,9 @@
 <script>
     import { writable } from "svelte/store";
-    import { fly, fade } from "svelte/transition";
-    import Carousel from "./_compotents/Carousel.svelte";
+    import { fly } from "svelte/transition";
     import contact from "./_assets/contact";
     import Project from "./_compotents/Project.svelte";
     import articles from "./_assets/articles";
-    import { each } from "svelte/internal";
 
     const job = writable([
         {

@@ -11,7 +11,7 @@ export default [
     },
     {
         name: 'github',
-        url: 'github.com/cdemon12',
+        url: 'https://github.com/cdemon12',
         icon: 'logo-github'
     }
 ]
