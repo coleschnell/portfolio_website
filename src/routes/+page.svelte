@@ -61,6 +61,7 @@
 
 </script>
 
+
 <svelte:window bind:innerWidth={width} />
 <div class="hero">
 
@@ -99,7 +100,7 @@
             <picture>
                 <source type="image/webp" srcset="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/src/routes/_assets/cole.webp">
                 <source type="image/jpeg" srcset="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/src/routes/_assets/cole.jpg">
-                <img src="src\routes\_assets\cole.jpg" alt="Cole Schnell">
+                <img src="https://raw.githubusercontent.com/cdemon12/portfolio_website/main/src/routes/_assets/cole.jpg" alt="Cole Schnell">
             </picture>
         </div>
         
