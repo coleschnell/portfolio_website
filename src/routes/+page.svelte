@@ -1,9 +1,11 @@
 <script>
     import { writable } from "svelte/store";
     import { fly } from "svelte/transition";
-    import contact from "../_assets/contact";
-    import Project from "../_compotents/Project.svelte";
-    import articles from "../_assets/articles";
+    import contact from "./_assets/contact";
+    import Project from "./_compotents/Project.svelte";
+    import articles from "./_assets/articles";
+    import Nav from "./_compotents/Nav.svelte";
+    import Footer from "./_compotents/Footer.svelte";
 
     const job = writable([
         {
@@ -61,6 +63,13 @@
 
 
 <svelte:window bind:innerWidth={width} />
+
+<div class="body">
+
+    <Nav />
+
+   <article>
+
 <div class="hero">
 
     <div class="left">
@@ -171,7 +180,34 @@
 
 </div>
 
+</article>
+
+<Footer />
+
+</div>
+
 <style lang="sass">
+    
+    $primary: red
+
+    *
+        margin: 0
+        padding: 0
+
+    .body
+        width: 100%
+        position: absolute
+        top: 0
+        left: 0
+        background-image: linear-gradient(to bottom right, #F9E79F, #6C3483)
+        overflow: hidden
+
+    article
+        grid-area: main
+        width: 100%
+        position: relative
+        top: 0
+        left: 0
 
     .hero
         display: flex
