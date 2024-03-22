@@ -5,6 +5,8 @@ import { geoPath, geoAlbersUsa } from 'd3-geo';
 import { draw } from 'svelte/transition';
 import { writable } from 'svelte/store'
 
+const data_prefix = "https://raw.githubusercontent.com/coleschnell/portfolio_website/main"
+
 let width = 1000, height = 1000;
 
 let m = { x: 0, y: 0 };
@@ -27,22 +29,22 @@ let tooltip = {width: 200, height: 500}
 let paintbrush = {name: "Not in a neighborhood", color: "#507e99"}
 
 onMount(async () => {
-    const shelby = await fetch('src/routes/map/_data/memphis_data.GeoJSON')
+    const shelby = await fetch(data_prefix + '/src/routes/map/_data/memphis_data.GeoJSON')
         .then(d => d.json())
 
     projection = geoAlbersUsa().fitSize([width, height], shelby)
     path = geoPath().projection(projection);
     tracts = shelby.features.map(tract => ({ ...tract, paintbrush}))
 
-    const shelby_roads = await fetch('src/routes/map/_data/shelby_roads.GeoJSON')
+    const shelby_roads = await fetch(data_prefix + '/src/routes/map/_data/shelby_roads.GeoJSON')
         .then(d => d.json())
     roads = shelby_roads.features
 
-    const neighborhoods = await fetch("src/routes/map/_data/neighborhoods.json")
+    const neighborhoods = await fetch(data_prefix + "/src/routes/map/_data/neighborhoods.json")
         .then(d => d.json())
     nbh = neighborhoods
 
-    const get_colors = await fetch("src/routes/map/_data/colors.json")
+    const get_colors = await fetch(data_prefix + "/src/routes/map/_data/colors.json")
         .then(d => d.json())
     colors = get_colors
 
