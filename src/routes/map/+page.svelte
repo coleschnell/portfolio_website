@@ -24,7 +24,7 @@
     let new_neighborhood;
     const cn = writable([]);
 
-    let tooltip = { width: 200, height: 500 };
+    let tooltip = { width: 500, height: 500 };
 
     let paintbrush = {
         name: "Not in a neighborhood",
@@ -34,7 +34,7 @@
 
     onMount(async () => {
         const shelby = await fetch(
-            data_prefix + "/src/routes/map/_data/memphis_data_extra.GeoJSON",
+            "/src/routes/map/_data/memphis_data_extra.GeoJSON",
         ).then((d) => d.json());
 
         projection = geoAlbersUsa().fitSize([width, height], shelby);
@@ -239,14 +239,13 @@
                 {/each}
             </g>
         </svg>
-
+        <!-- top: {m.y -
+            (tooltip.height / 2 + 150)}px; left:{m.x -
+            tooltip.width / 2}px" -->
         {#if hovered}
             <div
                 class="tooltip card"
-                style="height: {tooltip.height}; width: {tooltip.width}; top:{m.y -
-                    (tooltip.height / 2 + 150)}px; left:{m.x -
-                    tooltip.width / 2}px"
-            >
+                style="height: {tooltip.height}; width: {tooltip.width}; top: 50px; left: 20px;">
                 {#if hovered.TRACTCE}
                     {#if hovered.TRACTCE == "980402"}
                         <p><b>Census Tract #{hovered.TRACTCE}</b></p>
@@ -277,6 +276,21 @@
                             <b>Average commute to work:</b>
                             {formatNumber(hovered.commute_to_work)} min.
                         </p>
+                        {#if hovered.library}
+                            <p><b>Library:</b> {hovered.library.replace(",", ", ")}</p>
+                        {/if}
+                        {#if hovered.largest_park}
+                        <p><b>Largest park:</b> {hovered.largest_park}</p>
+                        {/if}
+                        {#if hovered.hospital}
+                        <p><b>Hospital:</b> {hovered.hospital.replace(",", ", ")}</p>
+                        {/if}
+                        {#if hovered.planning_district}
+                        <p><b>Memphis 3.0 planning district(s):</b> {hovered.planning_district.replace(",", ", ")}</p>
+                        {/if}
+                        {#if hovered.community_org}
+                        <p><b>Community Organization(s):</b> {hovered.community_org.replace(",", ", ")}</p>
+                        {/if}  
                     {/if}
                 {:else}
                     <p>
