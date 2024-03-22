@@ -1,9 +1,9 @@
 <script>
     import { writable } from "svelte/store";
     import { fly } from "svelte/transition";
-    import contact from "./_assets/contact";
-    import Project from "./_compotents/Project.svelte";
-    import articles from "./_assets/articles";
+    import contact from "../_assets/contact";
+    import Project from "../_compotents/Project.svelte";
+    import articles from "../_assets/articles";
 
     const job = writable([
         {
