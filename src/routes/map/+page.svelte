@@ -34,7 +34,7 @@
 
     onMount(async () => {
         const shelby = await fetch(
-            "/src/routes/map/_data/memphis_data_extra.GeoJSON",
+            data_prefix + "/src/routes/map/_data/memphis_data_extra.GeoJSON",
         ).then((d) => d.json());
 
         projection = geoAlbersUsa().fitSize([width, height], shelby);
