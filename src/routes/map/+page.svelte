@@ -154,7 +154,7 @@
         right and then click on Census tract on the left to color in that tract.
         Color in neighborhoods until satisfied. At the bottom of the page, fill in name and email, and
         click submit. An email should pop-up: add any notes at the top, and hit
-        send. Thanks for your help on my project.
+        send. Thanks for your help on my project. Don't leave or reload page; progress will be reset.
     </p>
 </header>
 
@@ -277,19 +277,19 @@
                             {formatNumber(hovered.commute_to_work)} min.
                         </p>
                         {#if hovered.library}
-                            <p><b>Library:</b> {hovered.library.replace(",", ", ")}</p>
+                            <p><b>Nearest library:</b> {hovered.library.replace(",", ", ")}</p>
                         {/if}
                         {#if hovered.largest_park}
                         <p><b>Largest park:</b> {hovered.largest_park}</p>
                         {/if}
                         {#if hovered.hospital}
-                        <p><b>Hospital:</b> {hovered.hospital.replace(",", ", ")}</p>
+                        <p><b>Nearest hospital:</b> {hovered.hospital.replace(",", ", ")}</p>
                         {/if}
                         {#if hovered.planning_district}
                         <p><b>Memphis 3.0 planning district(s):</b> {hovered.planning_district.replace(",", ", ")}</p>
                         {/if}
                         {#if hovered.community_org}
-                        <p><b>Community Organization(s):</b> {hovered.community_org.replace(",", ", ")}</p>
+                        <p><b>Community organization(s):</b> {hovered.community_org.replace(",", ", ")}</p>
                         {/if}  
                     {/if}
                 {:else}
@@ -350,25 +350,23 @@
         name="name"
         placeholder="Name"
     />
-    <input
+    <!-- <input
         bind:value={respondent_email}
         type="email"
         id="email"
         name="email"
         placeholder="Email"
-    />
+    /> -->
     <a
         class="button"
-        href="mailto:cschnell@bizjournals.com?cc={respondent_email
-            ? respondent_email
-            : ''}&subject=Survey%20Results%20{respondent_name
+        href="mailto:cschnell@bizjournals.com?&subject=Survey%20Results%20{respondent_name
             ? 'for ' + respondent_name
             : ''}&body={JSON.stringify(clean_results(tracts))}">Submit</a
     >
 </div>
 
 <footer>
-    <p>Source(s): U.S. Census; Natural Earth</p>
+    <p>Source(s): U.S. Census; Natural Earth; Memphis Data Hub</p>
     <a
         href="mailto:cschnell@bizjournals.com?subject=Reporting%20an%20Issue&body=Dear%20Support%2C%0A%0AI%20would%20like%20to%20report%20an%20issue%20I%20encountered%20while%20using%20your%20service.%0A%0AIssue%20Description%3A%20%0A%0ASteps%20to%20Reproduce%3A%20%0A%0AAdditional%20Information%3A%20%0A%0AThank%20you%20for%20your%20assistance.%0A%0AKind%20regards%2C%0A[Your%20Name]"
         >Report an Issue</a
