@@ -34,7 +34,8 @@
 
     onMount(async () => {
         const shelby = await fetch(
-            data_prefix + "/src/routes/map/_data/memphis_data_extra.GeoJSON",
+            data_prefix + 
+            "/src/routes/map/_data/memphis_data_extra.GeoJSON",
         ).then((d) => d.json());
 
         projection = geoAlbersUsa().fitSize([width, height], shelby);
@@ -42,8 +43,9 @@
 
         tracts = shelby.features.map((tract) => ({ ...tract, paintbrush }));
 
+
         tracts = tracts.map((tract) => {
-            if (tract.properties.pop_tract === "0") {
+            if (tract.properties.pop_tract === 0) {
                 tract.paintbrush = {
                     name: "Not in a neighborhood",
                     color: "#507e99",
@@ -51,14 +53,18 @@
                 };
             }
             if (tract.properties.TRACTCE === "980402") {
-                tract.paintbrush.name = "Shelby Farms";
-                tract.paintbrush.color = "green";
+                tract.paintbrush = {
+                    name: "Shelby Farms",
+                    color: "green",
+                    fill: "stripe",
+                };
             }
             return tract;
         });
 
         const shelby_roads = await fetch(
-            data_prefix + "/src/routes/map/_data/shelby_roads.GeoJSON",
+            data_prefix + 
+            "/src/routes/map/_data/shelby_roads.GeoJSON",
         ).then((d) => d.json());
         roads = shelby_roads.features;
 
@@ -101,8 +107,8 @@
         "I-55": "I-55",
     };
 
-    function mouseover(e, prop) {
-        hovered = prop;
+    function mouseover(e, prop, neighborhood = false) {
+        hovered = { ...prop, neighborhood};
     }
     function mouseout() {
         hovered = false;
@@ -205,7 +211,7 @@
                         d={path(feature)}
                         class="tract"
                         style="fill: {feature.paintbrush.color}"
-                        on:mouseover={(e) => mouseover(e, feature.properties)}
+                        on:mouseover={(e) => mouseover(e, feature.properties, feature.paintbrush.name)}
                         on:click={() => (feature.paintbrush = paintbrush)}
                     />
                 {/each}
@@ -245,7 +251,7 @@
         {#if hovered}
             <div
                 class="tooltip card"
-                style="height: {tooltip.height}; width: {tooltip.width}; top: 50px; left: 20px;">
+                style="height: {tooltip.height}; width: {tooltip.width}; top: 0px; left: 20px;">
                 {#if hovered.TRACTCE}
                     {#if hovered.TRACTCE == "980402"}
                         <p><b>Census Tract #{hovered.TRACTCE}</b></p>
@@ -255,6 +261,9 @@
                         <p><b>Population zero.</b></p>
                     {:else}
                         <p><b>Census Tract #{hovered.TRACTCE}</b></p>
+                        {#if hovered.neighborhood !== "Not in a neighborhood"}
+                        <p style="color: red;"><i>{hovered.neighborhood}</i></p>
+                        {/if}
                         <p>
                             <b>Pop:</b>
                             {formatNumber(hovered.pop_tract)} residents
@@ -268,7 +277,7 @@
                             {formatNumber(hovered.household_size)} members
                         </p>
                         <p>
-                            <b>Median income:</b> ${formatNumber(
+                            <b>Median household income:</b> ${formatNumber(
                                 hovered.med_income_tract,
                             )}
                         </p>
