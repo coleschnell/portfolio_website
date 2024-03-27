@@ -34,15 +34,13 @@
 
     onMount(async () => {
         const shelby = await fetch(
-            data_prefix + 
-            "/src/routes/map/_data/memphis_data_extra.GeoJSON",
+            data_prefix + "/src/routes/map/_data/memphis_data_extra.GeoJSON",
         ).then((d) => d.json());
 
         projection = geoAlbersUsa().fitSize([width, height], shelby);
         path = geoPath().projection(projection);
 
         tracts = shelby.features.map((tract) => ({ ...tract, paintbrush }));
-
 
         tracts = tracts.map((tract) => {
             if (tract.properties.pop_tract === 0) {
@@ -59,12 +57,18 @@
                     fill: "stripe",
                 };
             }
+            if (tract.properties.TRACTCE === "980100") {
+                tract.paintbrush = {
+                    name: "Airport",
+                    color: "#507e99",
+                    fill: "hatch",
+            };
+            }
             return tract;
         });
 
         const shelby_roads = await fetch(
-            data_prefix + 
-            "/src/routes/map/_data/shelby_roads.GeoJSON",
+            data_prefix + "/src/routes/map/_data/shelby_roads.GeoJSON",
         ).then((d) => d.json());
         roads = shelby_roads.features;
 
@@ -108,7 +112,7 @@
     };
 
     function mouseover(e, prop, neighborhood = false) {
-        hovered = { ...prop, neighborhood};
+        hovered = { ...prop, neighborhood };
     }
     function mouseout() {
         hovered = false;
@@ -156,11 +160,12 @@
 <header>
     <h1>Paint by <s>Numbers</s> Neighborhoods: Memphis Edition</h1>
     <p>
-        Click on a neighborhood (or add neighborhood and then click) on the
-        right and then click on Census tract on the left to color in that tract.
-        Color in neighborhoods until satisfied. At the bottom of the page, fill in name and email, and
-        click submit. An email should pop-up: add any notes at the top, and hit
-        send. Thanks for your help on my project. Don't leave or reload page; progress will be reset.
+        Click on a neighborhood on the right (or add neighborhood and then click) 
+        and then click on Census tract on the left to color in that tract.
+        Color in neighborhoods until satisfied. At the bottom of the page, fill
+        in name, and click submit. An email should pop-up: add any
+        notes at the top, and hit send. Thanks for your help on my project.
+        Don't leave or reload page; progress will be reset.
     </p>
 </header>
 
@@ -201,7 +206,21 @@
                     >
                     </image>
                 </pattern>
-
+                <pattern
+                    id="crosshatch"
+                    patternUnits="userSpaceOnUse"
+                    width="8"
+                    height="8"
+                >
+                    <image
+                        xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyM1MDdlOTknLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="
+                        x="0"
+                        y="0"
+                        width="8"
+                        height="8"
+                    >
+                    </image>
+                </pattern>
             </defs>
             <!-- Tracts -->
             <g>
@@ -211,11 +230,16 @@
                         d={path(feature)}
                         class="tract"
                         style="fill: {feature.paintbrush.color}"
-                        on:mouseover={(e) => mouseover(e, feature.properties, feature.paintbrush.name)}
+                        on:mouseover={(e) =>
+                            mouseover(
+                                e,
+                                feature.properties,
+                                feature.paintbrush.name,
+                            )}
                         on:click={() => (feature.paintbrush = paintbrush)}
                     />
                 {/each}
-                {#each tracts.filter((tract) => tract.paintbrush.fill === "stripe" && tract.paintbrush.color !== "green") as feature, i}
+                {#each tracts.filter((tract) => tract.paintbrush.fill === "stripe" && tract.paintbrush.color === "#507e99") as feature, i}
                     <!-- svelte-ignore a11y-click-events-have-key-events -->
                     <path
                         d={path(feature)}
@@ -225,11 +249,20 @@
                     />
                 {/each}
                 {#each tracts.filter((tract) => tract.paintbrush.fill === "stripe" && tract.paintbrush.color === "green") as feature, i}
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <path
+                        d={path(feature)}
+                        class="tract"
+                        style="fill: url(#diagonal-stripe-green)"
+                        on:mouseover={(e) => mouseover(e, feature.properties)}
+                    />
+                {/each}
+                {#each tracts.filter((tract) => tract.paintbrush.fill === "hatch" && tract.paintbrush.color === "#507e99") as feature, i}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <path
                     d={path(feature)}
                     class="tract"
-                    style="fill: url(#diagonal-stripe-green)"
+                    style="fill: url(#crosshatch)"
                     on:mouseover={(e) => mouseover(e, feature.properties)}
                 />
                 {/each}
@@ -251,18 +284,24 @@
         {#if hovered}
             <div
                 class="tooltip card"
-                style="height: {tooltip.height}; width: {tooltip.width}; top: 0px; left: 20px;">
+                style="height: {tooltip.height}; width: {tooltip.width}; top: 0px; left: 20px;"
+            >
                 {#if hovered.TRACTCE}
                     {#if hovered.TRACTCE == "980402"}
                         <p><b>Census Tract #{hovered.TRACTCE}</b></p>
                         <p><b>Shelby Farms</b></p>
+                    {:else if hovered.TRACTCE == "980100"}
+                        <p><b>Census Tract #{hovered.TRACTCE}</b></p>
+                        <p><b>Memphis International Airport</b></p> 
                     {:else if hovered.pop_tract == 0}
                         <p><b>Census Tract #{hovered.TRACTCE}</b></p>
                         <p><b>Population zero.</b></p>
                     {:else}
                         <p><b>Census Tract #{hovered.TRACTCE}</b></p>
                         {#if hovered.neighborhood !== "Not in a neighborhood"}
-                        <p style="color: red;"><i>{hovered.neighborhood}</i></p>
+                            <p style="color: red;">
+                                <i>{hovered.neighborhood}</i>
+                            </p>
                         {/if}
                         <p>
                             <b>Pop:</b>
@@ -286,20 +325,32 @@
                             {formatNumber(hovered.commute_to_work)} min.
                         </p>
                         {#if hovered.library}
-                            <p><b>Nearest library:</b> {hovered.library.replace(",", ", ")}</p>
+                            <p>
+                                <b>Nearest library:</b>
+                                {hovered.library.replace(",", ", ")}
+                            </p>
                         {/if}
                         {#if hovered.largest_park}
-                        <p><b>Largest park:</b> {hovered.largest_park}</p>
+                            <p><b>Largest park:</b> {hovered.largest_park}</p>
                         {/if}
                         {#if hovered.hospital}
-                        <p><b>Nearest hospital:</b> {hovered.hospital.replace(",", ", ")}</p>
+                            <p>
+                                <b>Nearest hospital:</b>
+                                {hovered.hospital.replace(",", ", ")}
+                            </p>
                         {/if}
                         {#if hovered.planning_district}
-                        <p><b>Memphis 3.0 planning district(s):</b> {hovered.planning_district.replace(",", ", ")}</p>
+                            <p>
+                                <b>Memphis 3.0 planning district(s):</b>
+                                {hovered.planning_district.replace(",", ", ")}
+                            </p>
                         {/if}
                         {#if hovered.community_org}
-                        <p><b>Community organization(s):</b> {hovered.community_org.replace(",", ", ")}</p>
-                        {/if}  
+                            <p>
+                                <b>Community organization(s):</b>
+                                {hovered.community_org.replace(",", ", ")}
+                            </p>
+                        {/if}
                     {/if}
                 {:else}
                     <p>
@@ -394,7 +445,7 @@
 
     .container {
         display: flex;
-        gap: 50px; 
+        gap: 50px;
     }
 
     .map {
