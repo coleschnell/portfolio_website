@@ -80,7 +80,7 @@ const xticks = createDatesArray();
 
 <div class="chart-container">
   <LayerCake
-    padding={{ top: 20, right: 210, bottom: 20, left: 50 }}
+    padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
     x={xKey}
     y={yKey}
     z={zKey}
