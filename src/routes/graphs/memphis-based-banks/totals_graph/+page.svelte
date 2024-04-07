@@ -5,14 +5,14 @@
   import { timeParse, timeFormat } from 'd3-time-format';
   import { format } from 'd3-format';
 
-  import MultiLine from './_components/MultiLine.svelte';
-  import AxisX from './_components/AxisX.svelte';
-  import AxisY from './_components/AxisY.svelte';
-  import Labels from './_components/GroupLabels.html.svelte';
-  import SharedTooltip from './_components/SharedTooltip.html.svelte';
+  import MultiLine from '../_components/MultiLine.svelte';
+  import AxisX from '../_components/AxisX.svelte';
+  import AxisY from '../_components/AxisY.svelte';
+  import Labels from '../_components/GroupLabels.html.svelte';
+  import SharedTooltip from '../_components/SharedTooltip.html.svelte';
 
   // This example loads csv data as json using @rollup/plugin-dsv
-  import data from './_data/deposits.csv';
+  import data from '../_data/totals.csv';
 
   /* --------------------------------------------
    * Set what is our x key to separate it from the other series
@@ -21,6 +21,7 @@
   const yKey = 'value';
   const zKey = 'bank';
 
+  console.log(data)
 
   const xKeyCast = timeParse('%Y-%m-%d');
 
@@ -79,7 +80,7 @@ const xticks = createDatesArray();
 
 <div class="chart-container">
   <LayerCake
-    padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
+    padding={{ top: 20, right: 210, bottom: 20, left: 50 }}
     x={xKey}
     y={yKey}
     z={zKey}

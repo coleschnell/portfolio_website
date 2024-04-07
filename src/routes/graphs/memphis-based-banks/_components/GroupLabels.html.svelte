@@ -25,11 +25,16 @@
 
 {#each $data as group}
   <div
-    class="label {group.bank == 'The Bank of Fayette County' ? "t20" : ""}{group.bank == 'Financial Federal Bank' ? "t-20" : ""}"
+    class="label 
+    {group.bank == 'The Bank of Fayette County' ? "t20" : ""}
+    {group.bank == 'Financial Federal Bank' ? "t-20" : ""}
+    {group.bank == 'Commercial industrial loans' ? "t-20" : ""} 
+    {group.bank == 'Commercial real estate loans' ? "t20" : ""} 
+    "
     style="
       top:{top(group.values) * 100}%;
       left:{left(group.values) * 100}%;
-      width: 200px;
+      width: 205px;
     "
   >
   <div class="point"

@@ -92,7 +92,7 @@
           y2={y}
         ></line>
       {/if}
-      {#if tick !== 0}
+      <!-- {#if tick !== 0} -->
       <text
         x='{x1}'
         {y}
@@ -100,7 +100,7 @@
         text-anchor={labelPosition === 'above' ? 'start' : 'end'}
         dy='{dy + (labelPosition === 'above' || (snapBaselineLabel === true && tickValPx === maxTickValPx) ? -3 : 4)}'
       >{format(tick)}</text>
-      {/if}
+      <!-- {/if} -->
     </g>
   {/each}
 </g>
@@ -108,6 +108,7 @@
 <style>
   .tick {
     font-size: 12.5px;
+    z-index: 9999;
   }
 
   .tick line {
@@ -119,6 +120,7 @@
 
   .tick text {
     fill: #666;
+    z-index: 9999;
   }
 
   .tick.tick-0 line {
