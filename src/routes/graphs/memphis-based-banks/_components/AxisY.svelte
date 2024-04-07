@@ -67,7 +67,6 @@
 
   $: maxTickValPx = Math.max(...tickVals.map($yScale));
 
-  $: console.log(tickVals)
 </script>
 
 <g class='axis y-axis'>

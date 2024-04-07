@@ -18,9 +18,10 @@
    */
   // $: left = values => $xScale(max(values, $x)) /  Math.max(...$xRange);
   // $: top = values => $yScale(max(values, $y)) / Math.max(...$yRange);
-    console.log($data[2])
     $: left = values => $xScale(values.slice(-1)[0].report_date)/  Math.max(...$xRange);
     $: top = values => $yScale(values.slice(-1)[0].value) / Math.max(...$yRange);
+    $: console.log(top($data[0].values))
+
 </script>
 
 {#each $data as group}

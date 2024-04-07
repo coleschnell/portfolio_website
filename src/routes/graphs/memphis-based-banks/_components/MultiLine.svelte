@@ -15,7 +15,6 @@
       .join('L');
   };
 
-  console.log($data[0])
 </script>
 
 <g class="line-group">

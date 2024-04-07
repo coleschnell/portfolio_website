@@ -12,7 +12,6 @@
         end: new Date("2020-04-01")
     }
 
-console.log($yRange)
 
  </script>
 

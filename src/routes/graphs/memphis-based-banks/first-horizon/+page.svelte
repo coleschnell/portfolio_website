@@ -10,11 +10,11 @@
   import AxisY from '../_components/AxisY.svelte';
   import Labels from '../_components/GroupLabels.html.svelte';
   import SharedTooltip from '../_components/SharedTooltip.html.svelte';
-  import RecessionBars from '../_components/RecessionBars.svelte';
-
+  import RecessionBars from '../_components/RecessionBars.svelte'
+  import Area from '../_components/Area.svelte'
 
   // This example loads csv data as json using @rollup/plugin-dsv
-  import data from '../_data/totals.csv';
+  import data from '../_data/first_horizon_deposits.csv';
 
   /* --------------------------------------------
    * Set what is our x key to separate it from the other series
@@ -22,7 +22,6 @@
   const xKey = 'report_date';
   const yKey = 'value';
   const zKey = 'bank';
-
 
   const xKeyCast = timeParse('%Y-%m-%d');
 
