@@ -10,6 +10,8 @@
   import AxisY from '../_components/AxisY.svelte';
   import Labels from '../_components/GroupLabels.html.svelte';
   import SharedTooltip from '../_components/SharedTooltip.html.svelte';
+  import RecessionBars from '../_components/RecessionBars.svelte';
+
 
   // This example loads csv data as json using @rollup/plugin-dsv
   import data from '../_data/totals.csv';
@@ -91,6 +93,7 @@ const xticks = createDatesArray();
     data={groupedData}
   >
     <Svg>
+      <RecessionBars/>
       <AxisX
         gridlines={false}
         ticks={xticks}
