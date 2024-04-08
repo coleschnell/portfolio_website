@@ -52,7 +52,7 @@
   // Function to create an array of dates from 2014 to 2023 with June 30th
     function createDatesArray() {
         const datesArray = [];
-        for (let year = 2014; year <= 2023; year++) {
+        for (let year = 2014; year <= 2023; year = year+3) {
             // Note: Months are zero-indexed in JavaScript, so June is represented as 5
             const date = new Date(year, 5, 30);
             datesArray.push(date);

@@ -85,8 +85,8 @@
     transform: translate(-50%, -50%);
     z-index: 15;
     pointer-events: none;
-    width: 6px; 
-    height: 6px; 
+    width: 8px; 
+    height: 8px; 
     background-color: black; 
     border-radius: 50%;
   }

@@ -7,7 +7,7 @@
     scrolling="no"
     frameborder="0"
     style="width: 0; min-width:100% !important; border: none;"
-    height="500px"
+    height="300px"
     data-external="1"
 ></iframe>
 </div>
