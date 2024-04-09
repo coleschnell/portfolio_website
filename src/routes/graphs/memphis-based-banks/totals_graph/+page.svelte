@@ -12,6 +12,8 @@
   import SharedTooltip from '../_components/SharedTooltip.html.svelte';
   import RecessionBars from '../_components/RecessionBars.svelte';
 
+  import { page } from '$app/stores';
+
 
   // This example loads csv data as json using @rollup/plugin-dsv
   import data from '../_data/totals.csv';
@@ -64,6 +66,14 @@
 // Call the function to create the dates array
 const xticks = createDatesArray();
 
+
+const q = $page.url.searchParams
+
+const title = decodeURIComponent(q.get('title'))
+const subhead = decodeURIComponent(q.get('subhead'))
+const source = decodeURIComponent(q.get('source'))
+const notes = decodeURIComponent(q.get('notes'))
+
 </script>
 
 <style>
@@ -77,9 +87,27 @@ const xticks = createDatesArray();
     width: 100%;
     height: 300px;
   }
+  .footnotes{
+    font-size: 12.5px;
+    color: #666;
+    display: flex;
+    width: calc(100% - 20px);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0px;
+  }
+
+  .footnotes > div {
+    line-height: 15px;
+  }
+
+  .chart-title{
+    font-size: 25px;
+  }
 </style>
 
 <div class="chart-container">
+<h3 class="chart-title">Bank deposits for Memphis-based community banks</h3>
   <LayerCake
     padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
     x={xKey}
@@ -118,4 +146,8 @@ const xticks = createDatesArray();
       />
     </Html>
   </LayerCake>
+  <div class="footnotes">
+    <div>Source: FDIC</div>
+    <div>Notes: Shaded area show the COVID-19 recession</div>
+  </div>
 </div>

@@ -16,6 +16,8 @@
   // This example loads csv data as json using @rollup/plugin-dsv
   import data from '../_data/first_horizon_deposits.csv';
 
+  import { page } from '$app/stores';
+
   /* --------------------------------------------
    * Set what is our x key to separate it from the other series
    */
@@ -63,6 +65,14 @@
 // Call the function to create the dates array
 const xticks = createDatesArray();
 
+
+const q = $page.url.searchParams
+
+const title = decodeURIComponent(q.get('title'))
+const subhead = decodeURIComponent(q.get('subhead'))
+const source = decodeURIComponent(q.get('source'))
+const notes = decodeURIComponent(q.get('notes'))
+
 </script>
 
 <style>
@@ -79,6 +89,7 @@ const xticks = createDatesArray();
 </style>
 
 <div class="chart-container">
+<h3 class="chart-title">Bank deposits for Memphis-based community banks</h3>
   <LayerCake
     padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
     x={xKey}
@@ -117,4 +128,6 @@ const xticks = createDatesArray();
       />
     </Html>
   </LayerCake>
+  <div>Source: FDIC</div>
+  <div>Notes: Shaded area show the COVID-19 recession</div>
 </div>

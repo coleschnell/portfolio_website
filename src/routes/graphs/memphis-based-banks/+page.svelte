@@ -12,6 +12,10 @@
   import SharedTooltip from './_components/SharedTooltip.html.svelte';
   import RecessionBars from './_components/RecessionBars.svelte'
 
+  import { page } from '$app/stores';
+  import { onMount } from 'svelte';
+
+
   // This example loads csv data as json using @rollup/plugin-dsv
   import data from './_data/deposits.csv';
 
@@ -63,7 +67,12 @@
 // Call the function to create the dates array
 const xticks = createDatesArray();
 
-console.log(xticks)
+const q = $page.url.searchParams
+
+const title = decodeURIComponent(q.get('title'))
+const subhead = decodeURIComponent(q.get('subhead'))
+const source = decodeURIComponent(q.get('source'))
+const notes = decodeURIComponent(q.get('notes'))
 
 </script>
 
@@ -77,12 +86,35 @@ console.log(xticks)
   .chart-container {
     width: 100%;
     height: 300px;
+    padding-top: 10px;
   }
+
+  .footnotes{
+    font-size: 12.5px;
+    color: #666;
+    display: flex;
+    width: calc(100% - 20px);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0px;
+  }
+
+  .footnotes > div {
+    line-height: 15px;
+  }
+
+  .chart-title{
+    font-size: 25px;
+  }
+
 </style>
 
 <div class="chart-container">
+  {#if title !== 'null'}
+  <h3 class="chart-title">{title}</h3>
+  {/if}
   <LayerCake
-    padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
+    padding={{ top: 10, right: 210, bottom: 20, left: 45 }}
     x={xKey}
     y={yKey}
     z={zKey}
@@ -119,4 +151,12 @@ console.log(xticks)
       />
     </Html>
   </LayerCake>
+  <div class="footnotes">
+    {#if source !== 'null'}
+    <div>Source: {source}</div>
+    {/if}
+    {#if notes !== 'null'}
+    <div>Notes: {notes}</div>
+    {/if}
+  </div>
 </div>

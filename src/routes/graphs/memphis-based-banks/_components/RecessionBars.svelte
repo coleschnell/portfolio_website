@@ -28,7 +28,7 @@
 
     rect{
         fill: #666;
-        fill-opacity: 0.3;
+        fill-opacity: 0.15;
     }
 
 </style>
