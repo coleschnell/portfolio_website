@@ -102,13 +102,14 @@ const notes = decodeURIComponent(q.get('notes'))
   }
 
   .chart-title{
-    font-size: 25px;
+    font-size: 20px;
   }
 </style>
 
 <div class="chart-container">
-<h3 class="chart-title">Bank deposits for Memphis-based community banks</h3>
-  <LayerCake
+  {#if title !== 'null'}
+  <h3 class="chart-title">{title}</h3>
+  {/if}  <LayerCake
     padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
     x={xKey}
     y={yKey}
@@ -147,7 +148,11 @@ const notes = decodeURIComponent(q.get('notes'))
     </Html>
   </LayerCake>
   <div class="footnotes">
-    <div>Source: FDIC</div>
-    <div>Notes: Shaded area show the COVID-19 recession</div>
+    {#if source !== 'null'}
+    <div>Source: {source}</div>
+    {/if}
+    {#if notes !== 'null'}
+    <div>Notes: {notes}</div>
+    {/if}
   </div>
 </div>

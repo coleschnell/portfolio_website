@@ -86,10 +86,29 @@ const notes = decodeURIComponent(q.get('notes'))
     width: 100%;
     height: 300px;
   }
+  .footnotes{
+    font-size: 12.5px;
+    color: #666;
+    display: flex;
+    width: calc(100% - 20px);
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0px;
+  }
+
+  .footnotes > div {
+    line-height: 15px;
+  }
+
+  .chart-title{
+    font-size: 20px;
+  }
 </style>
 
 <div class="chart-container">
-<h3 class="chart-title">Bank deposits for Memphis-based community banks</h3>
+  {#if title !== 'null'}
+  <h3 class="chart-title">{title}</h3>
+  {/if}
   <LayerCake
     padding={{ top: 20, right: 210, bottom: 20, left: 45 }}
     x={xKey}
@@ -128,6 +147,12 @@ const notes = decodeURIComponent(q.get('notes'))
       />
     </Html>
   </LayerCake>
-  <div>Source: FDIC</div>
-  <div>Notes: Shaded area show the COVID-19 recession</div>
+  <div class="footnotes">
+    {#if source !== 'null'}
+    <div>Source: {source}</div>
+    {/if}
+    {#if notes !== 'null'}
+    <div>Notes: {notes}</div>
+    {/if}
+  </div>
 </div>

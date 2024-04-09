@@ -104,7 +104,7 @@ const notes = decodeURIComponent(q.get('notes'))
   }
 
   .chart-title{
-    font-size: 25px;
+    font-size: 20px;
   }
 
 </style>

@@ -4,11 +4,12 @@
     
 
     onMount(() => {
-        let chart_text = {
+        let chart_params = {
             'title' : 'Bank deposits for Memphis-based community banks',
             'subhead' : 'null',
             'source' : 'FDIC',
-            'notes' : 'Shaded area show the COVID-19 recession'
+            'notes' : 'Shaded area show the COVID-19 recession',
+            'height' : "400px"
         }
 
         function objectToUrlParams(obj) {
@@ -23,10 +24,11 @@
 
         let chart = document.getElementById('chart')
         let src = chart?.getAttribute('src')
-        let url = encodeURI(src + '/?' + objectToUrlParams(chart_text))  //'/?title=' + title)
+        let url = encodeURI(src + '/?' + objectToUrlParams(chart_params))  //'/?title=' + title)
         chart?.setAttribute('src', url)  
 
-        chart?.setAttribute('title', chart_text.title ? chart_text.title : 'Untitled')
+        chart?.setAttribute('title', chart_params.title ? chart_params.title : 'Untitled')
+        chart?.setAttribute('height', chart_params.height ? chart_params.height : "300px")
     })
 
 
