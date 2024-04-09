@@ -5,11 +5,10 @@
 
     onMount(() => {
         let chart_params = {
-            'title' : 'Bank deposits for Memphis-based community banks',
+            'title' : 'Memphis-based community banks deposits',
             'subhead' : 'null',
             'source' : 'FDIC',
             'notes' : 'Shaded area show the COVID-19 recession',
-            'height' : "400px"
         }
 
         function objectToUrlParams(obj) {
@@ -29,6 +28,8 @@
 
         chart?.setAttribute('title', chart_params.title ? chart_params.title : 'Untitled')
         chart?.setAttribute('height', chart_params.height ? chart_params.height : "300px")
+
+        console.log(url)
     })
 
 

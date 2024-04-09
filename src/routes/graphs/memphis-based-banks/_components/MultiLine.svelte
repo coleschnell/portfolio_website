@@ -33,6 +33,7 @@
     stroke-linejoin: round;
     stroke-linecap: round;
     stroke-width: 3px;
+    stroke-opacity: 0.7;
   }
 
 </style>

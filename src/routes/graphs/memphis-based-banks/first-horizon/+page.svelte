@@ -28,7 +28,20 @@
   const xKeyCast = timeParse('%Y-%m-%d');
 
   const seriesNames = Object.keys(data[0]).filter(d => d !== xKey);
-  const seriesColors = ['#ffe4b8', '#ffb3c0', '#ff7ac7', '#ff00cc'];
+  // const seriesColors = ['#ffe4b8', '#ffb3c0', '#ff7ac7', '#ff00cc'];
+
+  const seriesColors =  [
+    "#16242c",  // --co-bizj-blue-900
+    "#b9c9d5", // --co-bizj-blue-100
+    // "#95aec1", // --co-bizj-blue-200
+    // "#7597ae", // --co-bizj-blue-300
+    // "#517f9a", // --co-bizj-blue-400
+    // "#256788", // --co-bizj-blue-500
+    // "#22546d", // --co-bizj-blue-600
+    // "#1e4357", // --co-bizj-blue-700
+    // "#1b3341", // --co-bizj-blue-800
+  ];
+
 
   /* --------------------------------------------
    * Cast values
