@@ -99,6 +99,11 @@ const notes = decodeURIComponent(q.get('notes'))
     width: 100%;
     height: 300px;
   }
+
+
+  * {
+    font-family: Graphik Web,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  }
   .footnotes{
     font-size: 12.5px;
     color: #666;
