@@ -14,11 +14,13 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"@types/d3-shape": "^3.1.1",
-		"svelte": "^3.54.0",
+		"rollup-plugin-svelte": "^7.2.2",
+		"svelte": "^3.59.2",
 		"svelte-check": "^3.0.1",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vite": "^4.3.0"
+		"vite": "^4.3.0",
+		"vite-plugin-string": "^1.2.3"
 	},
 	"type": "module",
 	"dependencies": {
@@ -27,3 +29,4 @@
 		"sass": "^1.62.1"
 	}
 }
+
