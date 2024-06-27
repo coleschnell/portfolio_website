@@ -6765,7 +6765,7 @@ function create_fragment(ctx) {
 			set_style(div0, "z-index", /*value*/ ctx[0] != /*steps*/ ctx[6].length - 1 ? 10 : 0);
 			add_render_callback(() => /*div0_elementresize_handler*/ ctx[8].call(div0));
 			attr(div1, "class", "sticky svelte-41rbiz");
-			attr(div1, "data-margin-top", "600");
+			attr(div1, "data-margin-top", "200");
 			attr(div2, "class", "section-container svelte-41rbiz");
 			attr(div2, "data-sticky-container", "");
 			attr(section, "class", "svelte-41rbiz");
