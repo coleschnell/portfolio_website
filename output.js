@@ -5938,32 +5938,542 @@ class Scrolly extends SvelteComponent {
 	}
 }
 
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+var sticky_compile = {exports: {}};
+
+(function (module, exports) {
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+	function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+	/**
+	 * Sticky.js
+	 * Library for sticky elements written in vanilla javascript. With this library you can easily set sticky elements on your website. It's also responsive.
+	 *
+	 * @version 1.3.0
+	 * @author Rafal Galus <biuro@rafalgalus.pl>
+	 * @website https://rgalus.github.io/sticky-js/
+	 * @repo https://github.com/rgalus/sticky-js
+	 * @license https://github.com/rgalus/sticky-js/blob/master/LICENSE
+	 */
+	var Sticky = /*#__PURE__*/function () {
+	  /**
+	   * Sticky instance constructor
+	   * @constructor
+	   * @param {string} selector - Selector which we can find elements
+	   * @param {string} options - Global options for sticky elements (could be overwritten by data-{option}="" attributes)
+	   */
+	  function Sticky() {
+	    var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	    _classCallCheck(this, Sticky);
+
+	    this.selector = selector;
+	    this.elements = [];
+	    this.version = '1.3.0';
+	    this.vp = this.getViewportSize();
+	    this.body = document.querySelector('body');
+	    this.options = {
+	      wrap: options.wrap || false,
+	      wrapWith: options.wrapWith || '<span></span>',
+	      marginTop: options.marginTop || 0,
+	      marginBottom: options.marginBottom || 0,
+	      stickyFor: options.stickyFor || 0,
+	      stickyClass: options.stickyClass || null,
+	      stickyContainer: options.stickyContainer || 'body'
+	    };
+	    this.updateScrollTopPosition = this.updateScrollTopPosition.bind(this);
+	    this.updateScrollTopPosition();
+	    window.addEventListener('load', this.updateScrollTopPosition);
+	    window.addEventListener('scroll', this.updateScrollTopPosition);
+	    this.run();
+	  }
+	  /**
+	   * Function that waits for page to be fully loaded and then renders & activates every sticky element found with specified selector
+	   * @function
+	   */
+
+
+	  _createClass(Sticky, [{
+	    key: "run",
+	    value: function run() {
+	      var _this = this;
+
+	      // wait for page to be fully loaded
+	      var pageLoaded = setInterval(function () {
+	        if (document.readyState === 'complete') {
+	          clearInterval(pageLoaded);
+	          var elements = document.querySelectorAll(_this.selector);
+
+	          _this.forEach(elements, function (element) {
+	            return _this.renderElement(element);
+	          });
+	        }
+	      }, 10);
+	    }
+	    /**
+	     * Function that assign needed variables for sticky element, that are used in future for calculations and other
+	     * @function
+	     * @param {node} element - Element to be rendered
+	     */
+
+	  }, {
+	    key: "renderElement",
+	    value: function renderElement(element) {
+	      var _this2 = this;
+
+	      // create container for variables needed in future
+	      element.sticky = {}; // set default variables
+
+	      element.sticky.active = false;
+	      element.sticky.marginTop = parseInt(element.getAttribute('data-margin-top')) || this.options.marginTop;
+	      element.sticky.marginBottom = parseInt(element.getAttribute('data-margin-bottom')) || this.options.marginBottom;
+	      element.sticky.stickyFor = parseInt(element.getAttribute('data-sticky-for')) || this.options.stickyFor;
+	      element.sticky.stickyClass = element.getAttribute('data-sticky-class') || this.options.stickyClass;
+	      element.sticky.wrap = element.hasAttribute('data-sticky-wrap') ? true : this.options.wrap; // @todo attribute for stickyContainer
+	      // element.sticky.stickyContainer = element.getAttribute('data-sticky-container') || this.options.stickyContainer;
+
+	      element.sticky.stickyContainer = this.options.stickyContainer;
+	      element.sticky.container = this.getStickyContainer(element);
+	      element.sticky.container.rect = this.getRectangle(element.sticky.container);
+	      element.sticky.rect = this.getRectangle(element); // fix when element is image that has not yet loaded and width, height = 0
+
+	      if (element.tagName.toLowerCase() === 'img') {
+	        element.onload = function () {
+	          return element.sticky.rect = _this2.getRectangle(element);
+	        };
+	      }
+
+	      if (element.sticky.wrap) {
+	        this.wrapElement(element);
+	      } // activate rendered element
+
+
+	      this.activate(element);
+	    }
+	    /**
+	     * Wraps element into placeholder element
+	     * @function
+	     * @param {node} element - Element to be wrapped
+	     */
+
+	  }, {
+	    key: "wrapElement",
+	    value: function wrapElement(element) {
+	      element.insertAdjacentHTML('beforebegin', element.getAttribute('data-sticky-wrapWith') || this.options.wrapWith);
+	      element.previousSibling.appendChild(element);
+	    }
+	    /**
+	     * Function that activates element when specified conditions are met and then initalise events
+	     * @function
+	     * @param {node} element - Element to be activated
+	     */
+
+	  }, {
+	    key: "activate",
+	    value: function activate(element) {
+	      if (element.sticky.rect.top + element.sticky.rect.height < element.sticky.container.rect.top + element.sticky.container.rect.height && element.sticky.stickyFor < this.vp.width && !element.sticky.active) {
+	        element.sticky.active = true;
+	      }
+
+	      if (this.elements.indexOf(element) < 0) {
+	        this.elements.push(element);
+	      }
+
+	      if (!element.sticky.resizeEvent) {
+	        this.initResizeEvents(element);
+	        element.sticky.resizeEvent = true;
+	      }
+
+	      if (!element.sticky.scrollEvent) {
+	        this.initScrollEvents(element);
+	        element.sticky.scrollEvent = true;
+	      }
+
+	      this.setPosition(element);
+	    }
+	    /**
+	     * Function which is adding onResizeEvents to window listener and assigns function to element as resizeListener
+	     * @function
+	     * @param {node} element - Element for which resize events are initialised
+	     */
+
+	  }, {
+	    key: "initResizeEvents",
+	    value: function initResizeEvents(element) {
+	      var _this3 = this;
+
+	      element.sticky.resizeListener = function () {
+	        return _this3.onResizeEvents(element);
+	      };
+
+	      window.addEventListener('resize', element.sticky.resizeListener);
+	    }
+	    /**
+	     * Removes element listener from resize event
+	     * @function
+	     * @param {node} element - Element from which listener is deleted
+	     */
+
+	  }, {
+	    key: "destroyResizeEvents",
+	    value: function destroyResizeEvents(element) {
+	      window.removeEventListener('resize', element.sticky.resizeListener);
+	    }
+	    /**
+	     * Function which is fired when user resize window. It checks if element should be activated or deactivated and then run setPosition function
+	     * @function
+	     * @param {node} element - Element for which event function is fired
+	     */
+
+	  }, {
+	    key: "onResizeEvents",
+	    value: function onResizeEvents(element) {
+	      this.vp = this.getViewportSize();
+	      element.sticky.rect = this.getRectangle(element);
+	      element.sticky.container.rect = this.getRectangle(element.sticky.container);
+
+	      if (element.sticky.rect.top + element.sticky.rect.height < element.sticky.container.rect.top + element.sticky.container.rect.height && element.sticky.stickyFor < this.vp.width && !element.sticky.active) {
+	        element.sticky.active = true;
+	      } else if (element.sticky.rect.top + element.sticky.rect.height >= element.sticky.container.rect.top + element.sticky.container.rect.height || element.sticky.stickyFor >= this.vp.width && element.sticky.active) {
+	        element.sticky.active = false;
+	      }
+
+	      this.setPosition(element);
+	    }
+	    /**
+	     * Function which is adding onScrollEvents to window listener and assigns function to element as scrollListener
+	     * @function
+	     * @param {node} element - Element for which scroll events are initialised
+	     */
+
+	  }, {
+	    key: "initScrollEvents",
+	    value: function initScrollEvents(element) {
+	      var _this4 = this;
+
+	      element.sticky.scrollListener = function () {
+	        return _this4.onScrollEvents(element);
+	      };
+
+	      window.addEventListener('scroll', element.sticky.scrollListener);
+	    }
+	    /**
+	     * Removes element listener from scroll event
+	     * @function
+	     * @param {node} element - Element from which listener is deleted
+	     */
+
+	  }, {
+	    key: "destroyScrollEvents",
+	    value: function destroyScrollEvents(element) {
+	      window.removeEventListener('scroll', element.sticky.scrollListener);
+	    }
+	    /**
+	     * Function which is fired when user scroll window. If element is active, function is invoking setPosition function
+	     * @function
+	     * @param {node} element - Element for which event function is fired
+	     */
+
+	  }, {
+	    key: "onScrollEvents",
+	    value: function onScrollEvents(element) {
+	      if (element.sticky && element.sticky.active) {
+	        this.setPosition(element);
+	      }
+	    }
+	    /**
+	     * Main function for the library. Here are some condition calculations and css appending for sticky element when user scroll window
+	     * @function
+	     * @param {node} element - Element that will be positioned if it's active
+	     */
+
+	  }, {
+	    key: "setPosition",
+	    value: function setPosition(element) {
+	      this.css(element, {
+	        position: '',
+	        width: '',
+	        top: '',
+	        left: ''
+	      });
+
+	      if (this.vp.height < element.sticky.rect.height || !element.sticky.active) {
+	        return;
+	      }
+
+	      if (!element.sticky.rect.width) {
+	        element.sticky.rect = this.getRectangle(element);
+	      }
+
+	      if (element.sticky.wrap) {
+	        this.css(element.parentNode, {
+	          display: 'block',
+	          width: element.sticky.rect.width + 'px',
+	          height: element.sticky.rect.height + 'px'
+	        });
+	      }
+
+	      if (element.sticky.rect.top === 0 && element.sticky.container === this.body) {
+	        this.css(element, {
+	          position: 'fixed',
+	          top: element.sticky.rect.top + 'px',
+	          left: element.sticky.rect.left + 'px',
+	          width: element.sticky.rect.width + 'px'
+	        });
+
+	        if (element.sticky.stickyClass) {
+	          element.classList.add(element.sticky.stickyClass);
+	        }
+	      } else if (this.scrollTop > element.sticky.rect.top - element.sticky.marginTop) {
+	        this.css(element, {
+	          position: 'fixed',
+	          width: element.sticky.rect.width + 'px',
+	          left: element.sticky.rect.left + 'px'
+	        });
+
+	        if (this.scrollTop + element.sticky.rect.height + element.sticky.marginTop > element.sticky.container.rect.top + element.sticky.container.offsetHeight - element.sticky.marginBottom) {
+	          if (element.sticky.stickyClass) {
+	            element.classList.remove(element.sticky.stickyClass);
+	          }
+
+	          this.css(element, {
+	            top: element.sticky.container.rect.top + element.sticky.container.offsetHeight - (this.scrollTop + element.sticky.rect.height + element.sticky.marginBottom) + 'px'
+	          });
+	        } else {
+	          if (element.sticky.stickyClass) {
+	            element.classList.add(element.sticky.stickyClass);
+	          }
+
+	          this.css(element, {
+	            top: element.sticky.marginTop + 'px'
+	          });
+	        }
+	      } else {
+	        if (element.sticky.stickyClass) {
+	          element.classList.remove(element.sticky.stickyClass);
+	        }
+
+	        this.css(element, {
+	          position: '',
+	          width: '',
+	          top: '',
+	          left: ''
+	        });
+
+	        if (element.sticky.wrap) {
+	          this.css(element.parentNode, {
+	            display: '',
+	            width: '',
+	            height: ''
+	          });
+	        }
+	      }
+	    }
+	    /**
+	     * Function that updates element sticky rectangle (with sticky container), then activate or deactivate element, then update position if it's active
+	     * @function
+	     */
+
+	  }, {
+	    key: "update",
+	    value: function update() {
+	      var _this5 = this;
+
+	      this.forEach(this.elements, function (element) {
+	        element.sticky.rect = _this5.getRectangle(element);
+	        element.sticky.container.rect = _this5.getRectangle(element.sticky.container);
+
+	        _this5.activate(element);
+
+	        _this5.setPosition(element);
+	      });
+	    }
+	    /**
+	     * Destroys sticky element, remove listeners
+	     * @function
+	     */
+
+	  }, {
+	    key: "destroy",
+	    value: function destroy() {
+	      var _this6 = this;
+
+	      window.removeEventListener('load', this.updateScrollTopPosition);
+	      window.removeEventListener('scroll', this.updateScrollTopPosition);
+	      this.forEach(this.elements, function (element) {
+	        _this6.destroyResizeEvents(element);
+
+	        _this6.destroyScrollEvents(element);
+
+	        delete element.sticky;
+	      });
+	    }
+	    /**
+	     * Function that returns container element in which sticky element is stuck (if is not specified, then it's stuck to body)
+	     * @function
+	     * @param {node} element - Element which sticky container are looked for
+	     * @return {node} element - Sticky container
+	     */
+
+	  }, {
+	    key: "getStickyContainer",
+	    value: function getStickyContainer(element) {
+	      var container = element.parentNode;
+
+	      while (!container.hasAttribute('data-sticky-container') && !container.parentNode.querySelector(element.sticky.stickyContainer) && container !== this.body) {
+	        container = container.parentNode;
+	      }
+
+	      return container;
+	    }
+	    /**
+	     * Function that returns element rectangle & position (width, height, top, left)
+	     * @function
+	     * @param {node} element - Element which position & rectangle are returned
+	     * @return {object}
+	     */
+
+	  }, {
+	    key: "getRectangle",
+	    value: function getRectangle(element) {
+	      this.css(element, {
+	        position: '',
+	        width: '',
+	        top: '',
+	        left: ''
+	      });
+	      var width = Math.max(element.offsetWidth, element.clientWidth, element.scrollWidth);
+	      var height = Math.max(element.offsetHeight, element.clientHeight, element.scrollHeight);
+	      var top = 0;
+	      var left = 0;
+
+	      do {
+	        top += element.offsetTop || 0;
+	        left += element.offsetLeft || 0;
+	        element = element.offsetParent;
+	      } while (element);
+
+	      return {
+	        top: top,
+	        left: left,
+	        width: width,
+	        height: height
+	      };
+	    }
+	    /**
+	     * Function that returns viewport dimensions
+	     * @function
+	     * @return {object}
+	     */
+
+	  }, {
+	    key: "getViewportSize",
+	    value: function getViewportSize() {
+	      return {
+	        width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+	        height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+	      };
+	    }
+	    /**
+	     * Function that updates window scroll position
+	     * @function
+	     * @return {number}
+	     */
+
+	  }, {
+	    key: "updateScrollTopPosition",
+	    value: function updateScrollTopPosition() {
+	      this.scrollTop = (window.pageYOffset || document.scrollTop) - (document.clientTop || 0) || 0;
+	    }
+	    /**
+	     * Helper function for loops
+	     * @helper
+	     * @param {array}
+	     * @param {function} callback - Callback function (no need for explanation)
+	     */
+
+	  }, {
+	    key: "forEach",
+	    value: function forEach(array, callback) {
+	      for (var i = 0, len = array.length; i < len; i++) {
+	        callback(array[i]);
+	      }
+	    }
+	    /**
+	     * Helper function to add/remove css properties for specified element.
+	     * @helper
+	     * @param {node} element - DOM element
+	     * @param {object} properties - CSS properties that will be added/removed from specified element
+	     */
+
+	  }, {
+	    key: "css",
+	    value: function css(element, properties) {
+	      for (var property in properties) {
+	        if (properties.hasOwnProperty(property)) {
+	          element.style[property] = properties[property];
+	        }
+	      }
+	    }
+	  }]);
+
+	  return Sticky;
+	}();
+	/**
+	 * Export function that supports AMD, CommonJS and Plain Browser.
+	 */
+
+
+	(function (root, factory) {
+	  {
+	    module.exports = factory;
+	  }
+	})(commonjsGlobal, Sticky); 
+} (sticky_compile));
+
+var sticky_compileExports = sticky_compile.exports;
+
+var Sticky = sticky_compileExports;
+
+var stickyJs = Sticky;
+
+var Sticky$1 = /*@__PURE__*/getDefaultExportFromCjs(stickyJs);
+
 /* src/routes/scrollygraph/+page.svelte generated by Svelte v3.59.2 */
 
 function add_css(target) {
-	append_styles(target, "svelte-19ael8e", "article.svelte-19ael8e.svelte-19ael8e{position:relative;width:672px;margin:50px auto;background-color:whitesmoke;min-height:100vh}body{overflow-x:hidden}.spacer.svelte-19ael8e.svelte-19ael8e{height:40vh}section.svelte-19ael8e.svelte-19ael8e{width:100%}.sticky.svelte-19ael8e.svelte-19ael8e{flex:1 1 60%;width:100% !important;margin:0 !important;position:sticky;top:0;left:0}.section-container.svelte-19ael8e.svelte-19ael8e{margin-top:1em;text-align:center;transition:background 100ms;display:flex}.step.svelte-19ael8e.svelte-19ael8e{height:80vh;display:flex;place-items:center;justify-content:center}.step-content.svelte-19ael8e.svelte-19ael8e{background:whitesmoke;color:#ccc;border-radius:5px;padding:.5rem 1rem;display:flex;flex-direction:column;justify-content:center;transition:background 500ms ease;box-shadow:1px 1px 10px rgba(0, 0, 0, .2);text-align:left;width:75%;margin:auto;max-width:500px}.step.active.svelte-19ael8e .step-content.svelte-19ael8e{background:white;color:black}.steps-container.svelte-19ael8e.svelte-19ael8e,.sticky.svelte-19ael8e.svelte-19ael8e{height:100%}.steps-container.svelte-19ael8e.svelte-19ael8e{flex:1 1 40%;z-index:10}.section-container.svelte-19ael8e.svelte-19ael8e{flex-direction:column-reverse}.sticky.svelte-19ael8e.svelte-19ael8e{width:95%;margin:auto}");
+	append_styles(target, "svelte-1ek6f5p", "article.svelte-1ek6f5p.svelte-1ek6f5p{position:relative;width:672px;margin:50px auto;background-color:whitesmoke;min-height:100vh}body{overflow-x:hidden}.spacer.svelte-1ek6f5p.svelte-1ek6f5p{height:40vh}section.svelte-1ek6f5p.svelte-1ek6f5p{width:100%}.sticky.svelte-1ek6f5p.svelte-1ek6f5p{width:672px !important;margin:0 !important}.section-container.svelte-1ek6f5p.svelte-1ek6f5p{margin-top:1em;text-align:center;transition:background 100ms;display:flex}.step.svelte-1ek6f5p.svelte-1ek6f5p{height:80vh;display:flex;place-items:center;justify-content:center}.step-content.svelte-1ek6f5p.svelte-1ek6f5p{background:whitesmoke;color:#ccc;border-radius:5px;padding:.5rem 1rem;display:flex;flex-direction:column;justify-content:center;transition:background 500ms ease;box-shadow:1px 1px 10px rgba(0, 0, 0, .2);text-align:left;width:75%;margin:auto;max-width:500px}.step.active.svelte-1ek6f5p .step-content.svelte-1ek6f5p{background:white;color:black}.steps-container.svelte-1ek6f5p.svelte-1ek6f5p,.sticky.svelte-1ek6f5p.svelte-1ek6f5p{height:100%}.steps-container.svelte-1ek6f5p.svelte-1ek6f5p{flex:1 1 40%;z-index:10}.section-container.svelte-1ek6f5p.svelte-1ek6f5p{flex-direction:column-reverse}.sticky.svelte-1ek6f5p.svelte-1ek6f5p{width:95%;margin:auto}");
 }
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[10] = list[i];
-	child_ctx[12] = i;
+	child_ctx[11] = list[i];
+	child_ctx[13] = i;
 	return child_ctx;
 }
 
-// (33:20) {#each steps as text, i}
+// (39:20) {#each steps as text, i}
 function create_each_block(ctx) {
 	let div1;
 	let div0;
-	let raw_value = /*text*/ ctx[10] + "";
+	let raw_value = /*text*/ ctx[11] + "";
 
 	return {
 		c() {
 			div1 = element("div");
 			div0 = element("div");
-			attr(div0, "class", "step-content svelte-19ael8e");
-			attr(div1, "class", "step svelte-19ael8e");
-			toggle_class(div1, "active", /*value*/ ctx[0] === /*i*/ ctx[12]);
+			attr(div0, "class", "step-content svelte-1ek6f5p");
+			attr(div1, "class", "step svelte-1ek6f5p");
+			toggle_class(div1, "active", /*value*/ ctx[0] === /*i*/ ctx[13]);
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);
@@ -5972,7 +6482,7 @@ function create_each_block(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty & /*value*/ 1) {
-				toggle_class(div1, "active", /*value*/ ctx[0] === /*i*/ ctx[12]);
+				toggle_class(div1, "active", /*value*/ ctx[0] === /*i*/ ctx[13]);
 			}
 		},
 		d(detaching) {
@@ -5981,7 +6491,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (32:16) <Scrolly bind:value>
+// (38:16) <Scrolly bind:value>
 function create_default_slot(ctx) {
 	let t;
 	let div;
@@ -6000,7 +6510,7 @@ function create_default_slot(ctx) {
 
 			t = space();
 			div = element("div");
-			attr(div, "class", "spacer svelte-19ael8e");
+			attr(div, "class", "spacer svelte-1ek6f5p");
 		},
 		m(target, anchor) {
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -6044,7 +6554,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (42:16) {#if hideTooltip !== true}
+// (48:16) {#if hideTooltip !== true}
 function create_if_block(ctx) {
 	let tooltip;
 	let current;
@@ -6127,7 +6637,7 @@ function create_fragment(ctx) {
 	map = new Map$1({
 			props: {
 				color: /*color*/ ctx[4],
-				sticky: /*sticky*/ ctx[1],
+				sticky: /*sticky_element*/ ctx[1],
 				step: /*value*/ ctx[0]
 			}
 		});
@@ -6149,12 +6659,12 @@ function create_fragment(ctx) {
 			create_component(legend.$$.fragment);
 			t2 = space();
 			create_component(map.$$.fragment);
-			attr(div0, "class", "steps-container svelte-19ael8e");
-			attr(div1, "class", "sticky svelte-19ael8e");
-			attr(div2, "class", "section-container svelte-19ael8e");
+			attr(div0, "class", "steps-container svelte-1ek6f5p");
+			attr(div1, "class", "sticky svelte-1ek6f5p");
+			attr(div2, "class", "section-container svelte-1ek6f5p");
 			attr(div2, "data-sticky-container", "");
-			attr(section, "class", "svelte-19ael8e");
-			attr(article, "class", "svelte-19ael8e");
+			attr(section, "class", "svelte-1ek6f5p");
+			attr(article, "class", "svelte-1ek6f5p");
 		},
 		m(target, anchor) {
 			insert(target, article, anchor);
@@ -6175,7 +6685,7 @@ function create_fragment(ctx) {
 		p(ctx, [dirty]) {
 			const scrolly_changes = {};
 
-			if (dirty & /*$$scope, value*/ 8193) {
+			if (dirty & /*$$scope, value*/ 16385) {
 				scrolly_changes.$$scope = { dirty, ctx };
 			}
 
@@ -6211,7 +6721,7 @@ function create_fragment(ctx) {
 			}
 
 			const map_changes = {};
-			if (dirty & /*sticky*/ 2) map_changes.sticky = /*sticky*/ ctx[1];
+			if (dirty & /*sticky_element*/ 2) map_changes.sticky = /*sticky_element*/ ctx[1];
 			if (dirty & /*value*/ 1) map_changes.step = /*value*/ ctx[0];
 			map.$set(map_changes);
 		},
@@ -6243,7 +6753,11 @@ function create_fragment(ctx) {
 
 function instance($$self, $$props, $$invalidate) {
 	const color = sequential(interpolatePiYG).domain([-2000, 2000]);
-	let value, sticky;
+	let value, sticky_element;
+
+	onMount(() => {
+		new Sticky$1('.sticky');
+	});
 
 	const steps = [
 		"<p>This is a dynamic, responsive scatterplot that uses Russell Goldenberg's <a href='	https://twitter.com/codenberg/status/1432774653139984387' target='_blank'><code>Scrolly</code></a> to update its points' values on scroll.</p>",
@@ -6264,8 +6778,8 @@ function instance($$self, $$props, $$invalidate) {
 
 	function div1_binding($$value) {
 		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
-			sticky = $$value;
-			$$invalidate(1, sticky);
+			sticky_element = $$value;
+			$$invalidate(1, sticky_element);
 		});
 	}
 
@@ -6277,7 +6791,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	return [
 		value,
-		sticky,
+		sticky_element,
 		evt,
 		hideTooltip,
 		color,
