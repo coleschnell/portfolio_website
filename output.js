@@ -4815,7 +4815,7 @@ function get_each_context_3(ctx, list, i) {
 	return child_ctx;
 }
 
-// (120:0) {#each Object.entries(point_elements) as [id, p]}
+// (118:0) {#each Object.entries(point_elements) as [id, p]}
 function create_each_block_3(ctx) {
 	let highlight;
 	let current;
@@ -4874,7 +4874,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (141:8) {#each counties.filter((county) => county.id != "28033") as feature, i}
+// (139:8) {#each counties.filter((county) => county.id != "28033") as feature, i}
 function create_each_block_2(ctx) {
 	let path_1;
 	let path_1_d_value;
@@ -4933,7 +4933,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (159:8) {#each counties.filter((county) => county.id == "28033") as feature, i}
+// (157:8) {#each counties.filter((county) => county.id == "28033") as feature, i}
 function create_each_block_1(ctx) {
 	let path_1;
 	let path_1_d_value;
@@ -4982,7 +4982,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (172:4) {#if highlight_props}
+// (170:4) {#if highlight_props}
 function create_if_block$2(ctx) {
 	let g;
 	let each_value = /*counties*/ ctx[4].filter(/*func_3*/ ctx[21]);
@@ -5040,7 +5040,7 @@ function create_if_block$2(ctx) {
 	};
 }
 
-// (174:12) {#each counties.filter((county) => county.id in highlight_props) as county, index}
+// (172:12) {#each counties.filter((county) => county.id in highlight_props) as county, index}
 function create_each_block$1(ctx) {
 	let circle;
 	let circle_cx_value;
@@ -5302,8 +5302,6 @@ function create_fragment$3(ctx) {
 		}
 	};
 }
-
-const data_prefix = "";
 const func_1 = county => county.id != "28033";
 const func_2 = county => county.id == "28033";
 
@@ -5342,8 +5340,8 @@ function instance$3($$self, $$props, $$invalidate) {
 
 	// const color = scaleQuantize([-200, 200], schemeBlues[9]);
 	onMount(async () => {
-		const us = await fetch(data_prefix + "src/routes/scrollygraph/_assets/counties-albers-10m.json").then(d => d.json());
-		const flows = await fetch(data_prefix + "src/routes/scrollygraph/_assets/flow_15y_w_center.json").then(d => d.json());
+		const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json").then(d => d.json());
+		const flows = await fetch("https://cdn.jsdelivr.net/gh/coleschnell/portfolio_website@master/src/routes/scrollygraph/_assets/flow_15y.json").then(d => d.json());
 		geoAlbersUsa().fitSize([width, height], us);
 		$$invalidate(5, path = geoPath());
 
