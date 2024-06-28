@@ -1,5 +1,7 @@
 'use strict';
 
+require('$app/forms');
+
 function noop$1() { }
 const identity$4 = x => x;
 function assign(tar, src) {
@@ -81,6 +83,9 @@ function get_all_dirty_from_scope($$scope) {
         return dirty;
     }
     return -1;
+}
+function null_to_empty(value) {
+    return value == null ? '' : value;
 }
 
 const is_client = typeof window !== 'undefined';
@@ -4414,30 +4419,33 @@ function create_fragment$5(ctx) {
 	let div10;
 	let div0;
 	let t0;
-	let t1_value = /*props*/ ctx[0].name + "";
+
+	let t1_value = (/*opt_name*/ ctx[3]
+	? /*opt_name*/ ctx[3]
+	: /*props*/ ctx[0].name + " County") + "";
+
 	let t1;
 	let t2;
-	let t3;
 	let div3;
 	let div1;
-	let t5;
+	let t4;
 	let div2;
-	let t6_value = /*props*/ ctx[0].movedin.toLocaleString() + "";
+	let t5_value = /*props*/ ctx[0].movedin.toLocaleString() + "";
+	let t5;
 	let t6;
-	let t7;
 	let div6;
 	let div4;
-	let t9;
+	let t8;
 	let div5;
-	let t10_value = /*props*/ ctx[0].movedout.toLocaleString() + "";
+	let t9_value = /*props*/ ctx[0].movedout.toLocaleString() + "";
+	let t9;
 	let t10;
-	let t11;
 	let div9;
 	let div7;
-	let t13;
+	let t12;
 	let div8;
-	let t14_value = /*props*/ ctx[0].movednet.toLocaleString() + "";
-	let t14;
+	let t13_value = /*props*/ ctx[0].movednet.toLocaleString() + "";
+	let t13;
 
 	return {
 		c() {
@@ -4445,28 +4453,27 @@ function create_fragment$5(ctx) {
 			div0 = element("div");
 			t0 = text(/*prefix*/ ctx[2]);
 			t1 = text(t1_value);
-			t2 = text(" County");
-			t3 = space();
+			t2 = space();
 			div3 = element("div");
 			div1 = element("div");
 			div1.textContent = "To DeSoto";
-			t5 = space();
+			t4 = space();
 			div2 = element("div");
-			t6 = text(t6_value);
-			t7 = space();
+			t5 = text(t5_value);
+			t6 = space();
 			div6 = element("div");
 			div4 = element("div");
 			div4.textContent = "From DeSoto";
-			t9 = space();
+			t8 = space();
 			div5 = element("div");
-			t10 = text(t10_value);
-			t11 = space();
+			t9 = text(t9_value);
+			t10 = space();
 			div9 = element("div");
 			div7 = element("div");
 			div7.textContent = "Net migration";
-			t13 = space();
+			t12 = space();
 			div8 = element("div");
-			t14 = text(t14_value);
+			t13 = text(t13_value);
 			attr(div0, "class", "name text svelte-zt0t47");
 			attr(div1, "class", "text svelte-zt0t47");
 			attr(div2, "class", "text svelte-zt0t47");
@@ -4487,42 +4494,45 @@ function create_fragment$5(ctx) {
 			append$1(div10, div0);
 			append$1(div0, t0);
 			append$1(div0, t1);
-			append$1(div0, t2);
-			append$1(div10, t3);
+			append$1(div10, t2);
 			append$1(div10, div3);
 			append$1(div3, div1);
-			append$1(div3, t5);
+			append$1(div3, t4);
 			append$1(div3, div2);
-			append$1(div2, t6);
-			append$1(div10, t7);
+			append$1(div2, t5);
+			append$1(div10, t6);
 			append$1(div10, div6);
 			append$1(div6, div4);
-			append$1(div6, t9);
+			append$1(div6, t8);
 			append$1(div6, div5);
-			append$1(div5, t10);
-			append$1(div10, t11);
+			append$1(div5, t9);
+			append$1(div10, t10);
 			append$1(div10, div9);
 			append$1(div9, div7);
-			append$1(div9, t13);
+			append$1(div9, t12);
 			append$1(div9, div8);
-			append$1(div8, t14);
+			append$1(div8, t13);
 		},
 		p(ctx, [dirty]) {
 			if (dirty & /*prefix*/ 4) set_data(t0, /*prefix*/ ctx[2]);
-			if (dirty & /*props*/ 1 && t1_value !== (t1_value = /*props*/ ctx[0].name + "")) set_data(t1, t1_value);
-			if (dirty & /*props*/ 1 && t6_value !== (t6_value = /*props*/ ctx[0].movedin.toLocaleString() + "")) set_data(t6, t6_value);
+
+			if (dirty & /*opt_name, props*/ 9 && t1_value !== (t1_value = (/*opt_name*/ ctx[3]
+			? /*opt_name*/ ctx[3]
+			: /*props*/ ctx[0].name + " County") + "")) set_data(t1, t1_value);
+
+			if (dirty & /*props*/ 1 && t5_value !== (t5_value = /*props*/ ctx[0].movedin.toLocaleString() + "")) set_data(t5, t5_value);
 
 			if (dirty & /*color, props*/ 3) {
 				set_style(div3, "box-shadow", "inset 0 -1px 0 0 #fff, inset 0 -7px 0 0 " + /*color*/ ctx[1](/*props*/ ctx[0].movedin));
 			}
 
-			if (dirty & /*props*/ 1 && t10_value !== (t10_value = /*props*/ ctx[0].movedout.toLocaleString() + "")) set_data(t10, t10_value);
+			if (dirty & /*props*/ 1 && t9_value !== (t9_value = /*props*/ ctx[0].movedout.toLocaleString() + "")) set_data(t9, t9_value);
 
 			if (dirty & /*color, props*/ 3) {
 				set_style(div6, "box-shadow", "inset 0 -1px 0 0 #fff, inset 0 -7px 0 0 " + /*color*/ ctx[1](-/*props*/ ctx[0].movedout));
 			}
 
-			if (dirty & /*props*/ 1 && t14_value !== (t14_value = /*props*/ ctx[0].movednet.toLocaleString() + "")) set_data(t14, t14_value);
+			if (dirty & /*props*/ 1 && t13_value !== (t13_value = /*props*/ ctx[0].movednet.toLocaleString() + "")) set_data(t13, t13_value);
 
 			if (dirty & /*color, props*/ 3) {
 				set_style(div9, "box-shadow", "inset 0 -1px 0 0 #fff, inset 0 -7px 0 0 " + /*color*/ ctx[1](/*props*/ ctx[0].movednet));
@@ -4540,31 +4550,145 @@ function instance$5($$self, $$props, $$invalidate) {
 	let { props } = $$props;
 	let { color } = $$props;
 	let { prefix = "" } = $$props;
+	let { opt_name } = $$props;
 
 	$$self.$$set = $$props => {
 		if ('props' in $$props) $$invalidate(0, props = $$props.props);
 		if ('color' in $$props) $$invalidate(1, color = $$props.color);
 		if ('prefix' in $$props) $$invalidate(2, prefix = $$props.prefix);
+		if ('opt_name' in $$props) $$invalidate(3, opt_name = $$props.opt_name);
 	};
 
-	return [props, color, prefix];
+	return [props, color, prefix, opt_name];
 }
 
 class InfoBlurb extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance$5, create_fragment$5, safe_not_equal, { props: 0, color: 1, prefix: 2 }, add_css$4);
+
+		init(
+			this,
+			options,
+			instance$5,
+			create_fragment$5,
+			safe_not_equal,
+			{
+				props: 0,
+				color: 1,
+				prefix: 2,
+				opt_name: 3
+			},
+			add_css$4
+		);
 	}
 }
 
 /* src/routes/scrollygraph/_compotents/Highlight.svelte generated by Svelte v3.59.2 */
 
 function add_css$3(target) {
-	append_styles(target, "svelte-154hsin", ".dot.svelte-154hsin{height:7px;width:7px;background-color:white;position:absolute;transform:translate(-50%, -50%);border-radius:50%}.line.svelte-154hsin{height:3px;background-color:white;position:absolute;transform-origin:center left}.label.svelte-154hsin{border:black solid 1px;position:absolute;background-color:white;border:1px solid #ccc;font-size:13px;background:rgba(255, 255, 255, 1);padding:5px;z-index:15;min-width:140px}");
+	append_styles(target, "svelte-24iuga", ".dot.svelte-24iuga{height:7px;width:7px;background-color:black;position:absolute;transform:translate(-50%, -50%)}.line.svelte-24iuga{height:1.5px;background-color:black;position:absolute;transform-origin:center left}.label.svelte-24iuga{border:black solid 1px;position:absolute;background-color:white;font-size:13px;background:rgba(255, 255, 255, 1);padding:5px;z-index:15;min-width:140px}.label-words.svelte-24iuga{font-size:40px;color:white;font-weight:bold;font-family:\"Graphik Web\", \"Helvetica Neue\", Helvetica, Arial,\n            sans-serif;position:absolute;transform:translate(-50%, -50%)}.pointer-words.svelte-24iuga{padding:0 4px;position:absolute;font-size:18px;color:black;text-shadow:1px 1px 0 #fff,\n            -1px 1px 0 #fff,\n            2px 0 0 #fff,\n            -2px 0 0 #fff}");
 }
 
-// (61:0) {#if $ox == 560 && top && step == 1}
+// (62:0) {#if $ox == init_ox && step == init_step}
 function create_if_block$3(ctx) {
+	let t0;
+	let t1;
+	let if_block2_anchor;
+	let current;
+	let if_block0 = /*style*/ ctx[7] == "infoblurb" && create_if_block_3(ctx);
+	let if_block1 = /*style*/ ctx[7] == "label" && create_if_block_2$2(ctx);
+	let if_block2 = /*style*/ ctx[7] == "pointer" && create_if_block_1$3(ctx);
+
+	return {
+		c() {
+			if (if_block0) if_block0.c();
+			t0 = space();
+			if (if_block1) if_block1.c();
+			t1 = space();
+			if (if_block2) if_block2.c();
+			if_block2_anchor = empty();
+		},
+		m(target, anchor) {
+			if (if_block0) if_block0.m(target, anchor);
+			insert(target, t0, anchor);
+			if (if_block1) if_block1.m(target, anchor);
+			insert(target, t1, anchor);
+			if (if_block2) if_block2.m(target, anchor);
+			insert(target, if_block2_anchor, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			if (/*style*/ ctx[7] == "infoblurb") {
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
+
+					if (dirty & /*style*/ 128) {
+						transition_in(if_block0, 1);
+					}
+				} else {
+					if_block0 = create_if_block_3(ctx);
+					if_block0.c();
+					transition_in(if_block0, 1);
+					if_block0.m(t0.parentNode, t0);
+				}
+			} else if (if_block0) {
+				group_outros();
+
+				transition_out(if_block0, 1, 1, () => {
+					if_block0 = null;
+				});
+
+				check_outros();
+			}
+
+			if (/*style*/ ctx[7] == "label") {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+				} else {
+					if_block1 = create_if_block_2$2(ctx);
+					if_block1.c();
+					if_block1.m(t1.parentNode, t1);
+				}
+			} else if (if_block1) {
+				if_block1.d(1);
+				if_block1 = null;
+			}
+
+			if (/*style*/ ctx[7] == "pointer") {
+				if (if_block2) {
+					if_block2.p(ctx, dirty);
+				} else {
+					if_block2 = create_if_block_1$3(ctx);
+					if_block2.c();
+					if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
+				}
+			} else if (if_block2) {
+				if_block2.d(1);
+				if_block2 = null;
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(if_block0);
+			current = true;
+		},
+		o(local) {
+			transition_out(if_block0);
+			current = false;
+		},
+		d(detaching) {
+			if (if_block0) if_block0.d(detaching);
+			if (detaching) detach(t0);
+			if (if_block1) if_block1.d(detaching);
+			if (detaching) detach(t1);
+			if (if_block2) if_block2.d(detaching);
+			if (detaching) detach(if_block2_anchor);
+		}
+	};
+}
+
+// (63:4) {#if style == "infoblurb"}
+function create_if_block_3(ctx) {
 	let div0;
 	let t0;
 	let div1;
@@ -4577,7 +4701,8 @@ function create_if_block$3(ctx) {
 			props: {
 				color: /*color*/ ctx[3],
 				props: /*props*/ ctx[2],
-				prefix: /*prefix*/ ctx[6]
+				prefix: /*prefix*/ ctx[6],
+				opt_name: /*opt_name*/ ctx[10]
 			}
 		});
 
@@ -4589,18 +4714,18 @@ function create_if_block$3(ctx) {
 			t1 = space();
 			div2 = element("div");
 			create_component(infoblurb.$$.fragment);
-			attr(div0, "class", "dot svelte-154hsin");
-			set_style(div0, "top", /*top*/ ctx[8] + "px");
-			set_style(div0, "left", /*left*/ ctx[7] + "px");
-			attr(div1, "class", "line svelte-154hsin");
+			attr(div0, "class", "dot svelte-24iuga");
+			set_style(div0, "top", /*top*/ ctx[12] + "px");
+			set_style(div0, "left", /*left*/ ctx[11] + "px");
+			attr(div1, "class", "line svelte-24iuga");
 			set_style(div1, "width", /*line_width*/ ctx[5] + "px");
-			set_style(div1, "top", /*top*/ ctx[8] + "px");
-			set_style(div1, "left", /*left*/ ctx[7] + "px");
+			set_style(div1, "top", /*top*/ ctx[12] + "px");
+			set_style(div1, "left", /*left*/ ctx[11] + "px");
 			set_style(div1, "transform", "translate(0%, -50%) rotate(" + /*angle*/ ctx[4] + "deg)");
-			attr(div2, "class", "label svelte-154hsin");
-			set_style(div2, "top", /*end_y*/ ctx[11] + "px");
-			set_style(div2, "left", /*end_x*/ ctx[10] + "px");
-			set_style(div2, "transform", "translate(" + /*trans*/ ctx[12].x + "%, " + /*trans*/ ctx[12].y + "%)");
+			attr(div2, "class", "label svelte-24iuga");
+			set_style(div2, "top", /*end_y*/ ctx[15] + "px");
+			set_style(div2, "left", /*end_x*/ ctx[14] + "px");
+			set_style(div2, "transform", "translate(" + /*trans*/ ctx[16].x + "%, " + /*trans*/ ctx[16].y + "%)");
 		},
 		m(target, anchor) {
 			insert(target, div0, anchor);
@@ -4612,24 +4737,24 @@ function create_if_block$3(ctx) {
 			current = true;
 		},
 		p(ctx, dirty) {
-			if (!current || dirty & /*top*/ 256) {
-				set_style(div0, "top", /*top*/ ctx[8] + "px");
+			if (!current || dirty & /*top*/ 4096) {
+				set_style(div0, "top", /*top*/ ctx[12] + "px");
 			}
 
-			if (!current || dirty & /*left*/ 128) {
-				set_style(div0, "left", /*left*/ ctx[7] + "px");
+			if (!current || dirty & /*left*/ 2048) {
+				set_style(div0, "left", /*left*/ ctx[11] + "px");
 			}
 
 			if (!current || dirty & /*line_width*/ 32) {
 				set_style(div1, "width", /*line_width*/ ctx[5] + "px");
 			}
 
-			if (!current || dirty & /*top*/ 256) {
-				set_style(div1, "top", /*top*/ ctx[8] + "px");
+			if (!current || dirty & /*top*/ 4096) {
+				set_style(div1, "top", /*top*/ ctx[12] + "px");
 			}
 
-			if (!current || dirty & /*left*/ 128) {
-				set_style(div1, "left", /*left*/ ctx[7] + "px");
+			if (!current || dirty & /*left*/ 2048) {
+				set_style(div1, "left", /*left*/ ctx[11] + "px");
 			}
 
 			if (!current || dirty & /*angle*/ 16) {
@@ -4640,18 +4765,19 @@ function create_if_block$3(ctx) {
 			if (dirty & /*color*/ 8) infoblurb_changes.color = /*color*/ ctx[3];
 			if (dirty & /*props*/ 4) infoblurb_changes.props = /*props*/ ctx[2];
 			if (dirty & /*prefix*/ 64) infoblurb_changes.prefix = /*prefix*/ ctx[6];
+			if (dirty & /*opt_name*/ 1024) infoblurb_changes.opt_name = /*opt_name*/ ctx[10];
 			infoblurb.$set(infoblurb_changes);
 
-			if (!current || dirty & /*end_y*/ 2048) {
-				set_style(div2, "top", /*end_y*/ ctx[11] + "px");
+			if (!current || dirty & /*end_y*/ 32768) {
+				set_style(div2, "top", /*end_y*/ ctx[15] + "px");
 			}
 
-			if (!current || dirty & /*end_x*/ 1024) {
-				set_style(div2, "left", /*end_x*/ ctx[10] + "px");
+			if (!current || dirty & /*end_x*/ 16384) {
+				set_style(div2, "left", /*end_x*/ ctx[14] + "px");
 			}
 
-			if (!current || dirty & /*trans*/ 4096) {
-				set_style(div2, "transform", "translate(" + /*trans*/ ctx[12].x + "%, " + /*trans*/ ctx[12].y + "%)");
+			if (!current || dirty & /*trans*/ 65536) {
+				set_style(div2, "transform", "translate(" + /*trans*/ ctx[16].x + "%, " + /*trans*/ ctx[16].y + "%)");
 			}
 		},
 		i(local) {
@@ -4674,10 +4800,145 @@ function create_if_block$3(ctx) {
 	};
 }
 
+// (91:4) {#if style == "label"}
+function create_if_block_2$2(ctx) {
+	let div;
+
+	let t_value = (/*opt_name*/ ctx[10]
+	? /*opt_name*/ ctx[10]
+	: /*props*/ ctx[2].name) + "";
+
+	let t;
+
+	return {
+		c() {
+			div = element("div");
+			t = text(t_value);
+			attr(div, "class", "label-words svelte-24iuga");
+			set_style(div, "top", /*top*/ ctx[12] + "px");
+			set_style(div, "left", /*left*/ ctx[11] + "px");
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+			append$1(div, t);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*opt_name, props*/ 1028 && t_value !== (t_value = (/*opt_name*/ ctx[10]
+			? /*opt_name*/ ctx[10]
+			: /*props*/ ctx[2].name) + "")) set_data(t, t_value);
+
+			if (dirty & /*top*/ 4096) {
+				set_style(div, "top", /*top*/ ctx[12] + "px");
+			}
+
+			if (dirty & /*left*/ 2048) {
+				set_style(div, "left", /*left*/ ctx[11] + "px");
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+// (102:4) {#if style == "pointer"}
+function create_if_block_1$3(ctx) {
+	let div0;
+	let t0;
+	let div1;
+	let t1;
+	let div2;
+
+	let t2_value = (/*opt_name*/ ctx[10]
+	? /*opt_name*/ ctx[10]
+	: /*props*/ ctx[2].name) + "";
+
+	let t2;
+
+	return {
+		c() {
+			div0 = element("div");
+			t0 = space();
+			div1 = element("div");
+			t1 = space();
+			div2 = element("div");
+			t2 = text(t2_value);
+			attr(div0, "class", "dot svelte-24iuga");
+			set_style(div0, "top", /*top*/ ctx[12] + "px");
+			set_style(div0, "left", /*left*/ ctx[11] + "px");
+			attr(div1, "class", "line svelte-24iuga");
+			set_style(div1, "width", /*line_width*/ ctx[5] + "px");
+			set_style(div1, "top", /*top*/ ctx[12] + "px");
+			set_style(div1, "left", /*left*/ ctx[11] + "px");
+			set_style(div1, "transform", "translate(0%, -50%) rotate(" + /*angle*/ ctx[4] + "deg)");
+			attr(div2, "class", "pointer-words svelte-24iuga");
+			set_style(div2, "top", /*end_y*/ ctx[15] + "px");
+			set_style(div2, "left", /*end_x*/ ctx[14] + "px");
+			set_style(div2, "transform", "translate(" + /*trans*/ ctx[16].x + "%, " + /*trans*/ ctx[16].y + "%)");
+		},
+		m(target, anchor) {
+			insert(target, div0, anchor);
+			insert(target, t0, anchor);
+			insert(target, div1, anchor);
+			insert(target, t1, anchor);
+			insert(target, div2, anchor);
+			append$1(div2, t2);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*top*/ 4096) {
+				set_style(div0, "top", /*top*/ ctx[12] + "px");
+			}
+
+			if (dirty & /*left*/ 2048) {
+				set_style(div0, "left", /*left*/ ctx[11] + "px");
+			}
+
+			if (dirty & /*line_width*/ 32) {
+				set_style(div1, "width", /*line_width*/ ctx[5] + "px");
+			}
+
+			if (dirty & /*top*/ 4096) {
+				set_style(div1, "top", /*top*/ ctx[12] + "px");
+			}
+
+			if (dirty & /*left*/ 2048) {
+				set_style(div1, "left", /*left*/ ctx[11] + "px");
+			}
+
+			if (dirty & /*angle*/ 16) {
+				set_style(div1, "transform", "translate(0%, -50%) rotate(" + /*angle*/ ctx[4] + "deg)");
+			}
+
+			if (dirty & /*opt_name, props*/ 1028 && t2_value !== (t2_value = (/*opt_name*/ ctx[10]
+			? /*opt_name*/ ctx[10]
+			: /*props*/ ctx[2].name) + "")) set_data(t2, t2_value);
+
+			if (dirty & /*end_y*/ 32768) {
+				set_style(div2, "top", /*end_y*/ ctx[15] + "px");
+			}
+
+			if (dirty & /*end_x*/ 16384) {
+				set_style(div2, "left", /*end_x*/ ctx[14] + "px");
+			}
+
+			if (dirty & /*trans*/ 65536) {
+				set_style(div2, "transform", "translate(" + /*trans*/ ctx[16].x + "%, " + /*trans*/ ctx[16].y + "%)");
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(div0);
+			if (detaching) detach(t0);
+			if (detaching) detach(div1);
+			if (detaching) detach(t1);
+			if (detaching) detach(div2);
+		}
+	};
+}
+
 function create_fragment$4(ctx) {
 	let if_block_anchor;
 	let current;
-	let if_block = /*$ox*/ ctx[9] == 560 && /*top*/ ctx[8] && /*step*/ ctx[1] == 1 && create_if_block$3(ctx);
+	let if_block = /*$ox*/ ctx[13] == /*init_ox*/ ctx[9] && /*step*/ ctx[1] == /*init_step*/ ctx[8] && create_if_block$3(ctx);
 
 	return {
 		c() {
@@ -4690,11 +4951,11 @@ function create_fragment$4(ctx) {
 			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (/*$ox*/ ctx[9] == 560 && /*top*/ ctx[8] && /*step*/ ctx[1] == 1) {
+			if (/*$ox*/ ctx[13] == /*init_ox*/ ctx[9] && /*step*/ ctx[1] == /*init_step*/ ctx[8]) {
 				if (if_block) {
 					if_block.p(ctx, dirty);
 
-					if (dirty & /*$ox, top, step*/ 770) {
+					if (dirty & /*$ox, init_ox, step, init_step*/ 8962) {
 						transition_in(if_block, 1);
 					}
 				} else {
@@ -4732,7 +4993,7 @@ function create_fragment$4(ctx) {
 function instance$4($$self, $$props, $$invalidate) {
 	let $ox,
 		$$unsubscribe_ox = noop$1,
-		$$subscribe_ox = () => ($$unsubscribe_ox(), $$unsubscribe_ox = subscribe(ox, $$value => $$invalidate(9, $ox = $$value)), ox);
+		$$subscribe_ox = () => ($$unsubscribe_ox(), $$unsubscribe_ox = subscribe(ox, $$value => $$invalidate(13, $ox = $$value)), ox);
 
 	$$self.$$.on_destroy.push(() => $$unsubscribe_ox());
 	let { p } = $$props;
@@ -4745,52 +5006,60 @@ function instance$4($$self, $$props, $$invalidate) {
 	let { angle = -90 } = $$props;
 	let { line_width = 50 } = $$props;
 	let { prefix = "" } = $$props;
+	let { style = "infoblurb" } = $$props;
+	let { init_step = 1 } = $$props;
+	let { init_ox = 560 } = $$props;
+	let { opt_name = false } = $$props;
 	let left, top, end_x, end_y, offset_x, offset_y, trans;
 
 	const translate_vals = {
 		right: { x: 0, y: -50 },
 		top: { x: -50, y: -100 },
 		bottom: { x: -50, y: 0 },
-		left: { x: 100, y: -50 }
+		left: { x: -100, y: -50 }
 	};
 
 	$$self.$$set = $$props => {
-		if ('p' in $$props) $$invalidate(13, p = $$props.p);
+		if ('p' in $$props) $$invalidate(17, p = $$props.p);
 		if ('ox' in $$props) $$subscribe_ox($$invalidate(0, ox = $$props.ox));
 		if ('step' in $$props) $$invalidate(1, step = $$props.step);
 		if ('props' in $$props) $$invalidate(2, props = $$props.props);
 		if ('color' in $$props) $$invalidate(3, color = $$props.color);
-		if ('sticky' in $$props) $$invalidate(14, sticky = $$props.sticky);
+		if ('sticky' in $$props) $$invalidate(18, sticky = $$props.sticky);
 		if ('angle' in $$props) $$invalidate(4, angle = $$props.angle);
 		if ('line_width' in $$props) $$invalidate(5, line_width = $$props.line_width);
 		if ('prefix' in $$props) $$invalidate(6, prefix = $$props.prefix);
+		if ('style' in $$props) $$invalidate(7, style = $$props.style);
+		if ('init_step' in $$props) $$invalidate(8, init_step = $$props.init_step);
+		if ('init_ox' in $$props) $$invalidate(9, init_ox = $$props.init_ox);
+		if ('opt_name' in $$props) $$invalidate(10, opt_name = $$props.opt_name);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*$ox, step, p, sticky, angle, line_width, left, offset_x, top, offset_y*/ 123826) {
+		if ($$self.$$.dirty & /*$ox, init_ox, step, init_step, p, sticky, angle, line_width, left, offset_x, top, offset_y*/ 1981234) {
 			{
-				if ($ox == 560 && step == 1) {
-					$$invalidate(8, top = p.getBoundingClientRect().top - sticky.getBoundingClientRect().top);
-					$$invalidate(7, left = p.getBoundingClientRect().left - sticky.getBoundingClientRect().left);
-					$$invalidate(15, offset_x = Math.cos(angle * (Math.PI / 180)) * line_width);
-					$$invalidate(16, offset_y = Math.sin(angle * (Math.PI / 180)) * line_width);
-					$$invalidate(10, end_x = left + offset_x);
-					$$invalidate(11, end_y = top + offset_y);
+				if ($ox == init_ox && step == init_step) {
+					$$invalidate(12, top = p.getBoundingClientRect().top - sticky.getBoundingClientRect().top);
+					$$invalidate(11, left = p.getBoundingClientRect().left - sticky.getBoundingClientRect().left);
+					$$invalidate(19, offset_x = Math.cos(angle * (Math.PI / 180)) * line_width);
+					$$invalidate(20, offset_y = Math.sin(angle * (Math.PI / 180)) * line_width);
+					$$invalidate(14, end_x = left + offset_x);
+					$$invalidate(15, end_y = top + offset_y);
 
 					if (angle < -45 && angle > -135) {
-						$$invalidate(12, trans = translate_vals.top);
+						$$invalidate(16, trans = translate_vals.top);
 					}
 
 					if (angle < -135 && angle > -180 || angle < 180 && angle > 135) {
-						$$invalidate(12, trans = translate_vals.left);
+						$$invalidate(16, trans = translate_vals.left);
 					}
 
 					if (angle < 135 && angle > 45) {
-						$$invalidate(12, trans = translate_vals.bottom);
+						$$invalidate(16, trans = translate_vals.bottom);
 					}
 
 					if (angle < 45 && angle > -45) {
-						$$invalidate(12, trans = translate_vals.right);
+						$$invalidate(16, trans = translate_vals.right);
 					}
 				}
 			}
@@ -4805,6 +5074,10 @@ function instance$4($$self, $$props, $$invalidate) {
 		angle,
 		line_width,
 		prefix,
+		style,
+		init_step,
+		init_ox,
+		opt_name,
 		left,
 		top,
 		$ox,
@@ -4829,15 +5102,19 @@ class Highlight extends SvelteComponent {
 			create_fragment$4,
 			safe_not_equal,
 			{
-				p: 13,
+				p: 17,
 				ox: 0,
 				step: 1,
 				props: 2,
 				color: 3,
-				sticky: 14,
+				sticky: 18,
 				angle: 4,
 				line_width: 5,
-				prefix: 6
+				prefix: 6,
+				style: 7,
+				init_step: 8,
+				init_ox: 9,
+				opt_name: 10
 			},
 			add_css$3
 		);
@@ -4847,118 +5124,120 @@ class Highlight extends SvelteComponent {
 /* src/routes/scrollygraph/_compotents/Map.svelte generated by Svelte v3.59.2 */
 
 function add_css$2(target) {
-	append_styles(target, "svelte-bmp9je", ".county.svelte-bmp9je{stroke:white;stroke-width:0.1;stroke-opacity:1}#desoto.svelte-bmp9je{z-index:10;stroke:white;stroke-width:0.3;stroke-opacity:1;box-shadow:rgba(0, 0, 0, 0.4) 0px 2px 4px,\n            rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,\n            rgba(0, 0, 0, 0.2) 0px -3px 0px inset}");
+	append_styles(target, "svelte-jipw3q", ".county.svelte-jipw3q{stroke:white;stroke-width:0.1;transition:fill-opacity 1s ease-out}.state.svelte-jipw3q{stroke:white;stroke-width:0.4;transition:fill-opacity 1s ease-out}.desoto.svelte-jipw3q{z-index:10;stroke:white;stroke-width:0.3;stroke-opacity:1;box-shadow:rgba(0, 0, 0, 0.4) 0px 2px 4px,\n            rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,\n            rgba(0, 0, 0, 0.2) 0px -3px 0px inset}");
 }
 
 function get_each_context$1(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[33] = list[i];
-	child_ctx[34] = list;
-	child_ctx[35] = i;
+	child_ctx[32] = list[i];
+	const constants_0 = /*point_elements*/ child_ctx[6][/*props*/ child_ctx[32].id];
+	child_ctx[33] = constants_0;
 	return child_ctx;
 }
 
 function get_each_context_1(ctx, list, i) {
 	const child_ctx = ctx.slice();
 	child_ctx[36] = list[i];
+	child_ctx[37] = list;
 	child_ctx[38] = i;
 	return child_ctx;
 }
 
 function get_each_context_2(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[36] = list[i];
-	child_ctx[38] = i;
+	child_ctx[39] = list[i];
+	child_ctx[41] = i;
 	return child_ctx;
 }
 
 function get_each_context_3(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[40] = list[i][0];
-	child_ctx[17] = list[i][1];
+	child_ctx[39] = list[i];
+	child_ctx[41] = i;
+	const constants_0 = /*feature*/ child_ctx[39].id == "28033";
+	child_ctx[42] = constants_0;
+	const constants_1 = /*feature*/ child_ctx[39].id == "47157";
+	child_ctx[43] = constants_1;
 	return child_ctx;
 }
 
-// (126:0) {#each Object.entries(point_elements) as [id, p]}
-function create_each_block_3(ctx) {
-	let highlight;
-	let current;
+function get_each_context_4(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[39] = list[i];
+	child_ctx[41] = i;
+	return child_ctx;
+}
 
-	function func(...args) {
-		return /*func*/ ctx[18](/*id*/ ctx[40], ...args);
-	}
-
-	highlight = new Highlight({
-			props: {
-				color: /*color*/ ctx[2],
-				p: /*p*/ ctx[17],
-				ox: /*ox*/ ctx[11],
-				step: /*step*/ ctx[0],
-				sticky: /*sticky*/ ctx[1],
-				angle: /*highlight_props*/ ctx[6][/*id*/ ctx[40]].angle,
-				line_width: /*highlight_props*/ ctx[6][/*id*/ ctx[40]].len,
-				prefix: /*highlight_props*/ ctx[6][/*id*/ ctx[40]].prefix,
-				props: /*counties*/ ctx[3].filter(func)[0].properties
-			}
-		});
+// (181:8) {#each states.filter((state) => state.id == "28") as feature, i}
+function create_each_block_4(ctx) {
+	let path_1;
+	let path_1_d_value;
+	let path_1_fill_opacity_value;
 
 	return {
 		c() {
-			create_component(highlight.$$.fragment);
+			path_1 = svg_element("path");
+			attr(path_1, "d", path_1_d_value = /*path*/ ctx[5](/*feature*/ ctx[39]));
+			attr(path_1, "class", "state svelte-jipw3q");
+			attr(path_1, "fill", "blue");
+			attr(path_1, "fill-opacity", path_1_fill_opacity_value = /*step*/ ctx[0] == 1 ? 1 : 0);
 		},
 		m(target, anchor) {
-			mount_component(highlight, target, anchor);
-			current = true;
+			insert(target, path_1, anchor);
 		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-			const highlight_changes = {};
-			if (dirty[0] & /*color*/ 4) highlight_changes.color = /*color*/ ctx[2];
-			if (dirty[0] & /*point_elements*/ 32) highlight_changes.p = /*p*/ ctx[17];
-			if (dirty[0] & /*step*/ 1) highlight_changes.step = /*step*/ ctx[0];
-			if (dirty[0] & /*sticky*/ 2) highlight_changes.sticky = /*sticky*/ ctx[1];
-			if (dirty[0] & /*highlight_props, point_elements*/ 96) highlight_changes.angle = /*highlight_props*/ ctx[6][/*id*/ ctx[40]].angle;
-			if (dirty[0] & /*highlight_props, point_elements*/ 96) highlight_changes.line_width = /*highlight_props*/ ctx[6][/*id*/ ctx[40]].len;
-			if (dirty[0] & /*highlight_props, point_elements*/ 96) highlight_changes.prefix = /*highlight_props*/ ctx[6][/*id*/ ctx[40]].prefix;
-			if (dirty[0] & /*counties, point_elements*/ 40) highlight_changes.props = /*counties*/ ctx[3].filter(func)[0].properties;
-			highlight.$set(highlight_changes);
-		},
-		i(local) {
-			if (current) return;
-			transition_in(highlight.$$.fragment, local);
-			current = true;
-		},
-		o(local) {
-			transition_out(highlight.$$.fragment, local);
-			current = false;
+		p(ctx, dirty) {
+			if (dirty[0] & /*path, states*/ 48 && path_1_d_value !== (path_1_d_value = /*path*/ ctx[5](/*feature*/ ctx[39]))) {
+				attr(path_1, "d", path_1_d_value);
+			}
+
+			if (dirty[0] & /*step*/ 1 && path_1_fill_opacity_value !== (path_1_fill_opacity_value = /*step*/ ctx[0] == 1 ? 1 : 0)) {
+				attr(path_1, "fill-opacity", path_1_fill_opacity_value);
+			}
 		},
 		d(detaching) {
-			destroy_component(highlight, detaching);
+			if (detaching) detach(path_1);
 		}
 	};
 }
 
-// (147:8) {#each counties.filter((county) => county.id != "28033") as feature, i}
-function create_each_block_2(ctx) {
+// (189:8) {#each counties as feature, i}
+function create_each_block_3(ctx) {
 	let path_1;
 	let path_1_d_value;
+	let path_1_class_value;
+	let path_1_stroke_opacity_value;
+	let path_1_fill_opacity_value;
 	let path_1_fill_value;
 	let mounted;
 	let dispose;
 
 	function mouseover_handler(...args) {
-		return /*mouseover_handler*/ ctx[19](/*feature*/ ctx[36], ...args);
+		return /*mouseover_handler*/ ctx[18](/*feature*/ ctx[39], ...args);
 	}
 
 	return {
 		c() {
 			path_1 = svg_element("path");
-			attr(path_1, "d", path_1_d_value = /*path*/ ctx[4](/*feature*/ ctx[36]));
-			attr(path_1, "class", "county svelte-bmp9je");
+			attr(path_1, "d", path_1_d_value = /*path*/ ctx[5](/*feature*/ ctx[39]));
+			attr(path_1, "class", path_1_class_value = "" + (null_to_empty(/*desoto*/ ctx[42] ? "desoto" : "county") + " svelte-jipw3q"));
 
-			attr(path_1, "fill", path_1_fill_value = /*feature*/ ctx[36].properties.movednet == 0
-			? "#D3D3D3"
-			: /*color*/ ctx[2](/*feature*/ ctx[36].properties.movednet));
+			attr(path_1, "stroke-opacity", path_1_stroke_opacity_value = /*desoto*/ ctx[42]
+			? 1
+			: /*shelby*/ ctx[43] && /*step*/ ctx[0] == 1
+				? 1
+				: /*step*/ ctx[0] < 2 ? 0 : 1);
+
+			attr(path_1, "fill-opacity", path_1_fill_opacity_value = /*desoto*/ ctx[42]
+			? 1
+			: /*shelby*/ ctx[43] && /*step*/ ctx[0] == 1
+				? 1
+				: /*step*/ ctx[0] < 2 ? 0 : 1);
+
+			attr(path_1, "fill", path_1_fill_value = /*desoto*/ ctx[42]
+			? "gold"
+			: /*feature*/ ctx[39].properties.movednet == 0
+				? "#D3D3D3"
+				: /*color*/ ctx[2](/*feature*/ ctx[39].properties.movednet));
 
 			attr(path_1, "role", "tooltip");
 		},
@@ -4969,7 +5248,7 @@ function create_each_block_2(ctx) {
 				dispose = [
 					listen(path_1, "mouseover", mouseover_handler),
 					listen(path_1, "mousemove", function () {
-						if (is_function(/*handleMousemove*/ ctx[16](/*feature*/ ctx[36]))) /*handleMousemove*/ ctx[16](/*feature*/ ctx[36]).apply(this, arguments);
+						if (is_function(/*handleMousemove*/ ctx[17](/*feature*/ ctx[39]))) /*handleMousemove*/ ctx[17](/*feature*/ ctx[39]).apply(this, arguments);
 					})
 				];
 
@@ -4979,13 +5258,35 @@ function create_each_block_2(ctx) {
 		p(new_ctx, dirty) {
 			ctx = new_ctx;
 
-			if (dirty[0] & /*path, counties*/ 24 && path_1_d_value !== (path_1_d_value = /*path*/ ctx[4](/*feature*/ ctx[36]))) {
+			if (dirty[0] & /*path, counties*/ 40 && path_1_d_value !== (path_1_d_value = /*path*/ ctx[5](/*feature*/ ctx[39]))) {
 				attr(path_1, "d", path_1_d_value);
 			}
 
-			if (dirty[0] & /*counties, color*/ 12 && path_1_fill_value !== (path_1_fill_value = /*feature*/ ctx[36].properties.movednet == 0
-			? "#D3D3D3"
-			: /*color*/ ctx[2](/*feature*/ ctx[36].properties.movednet))) {
+			if (dirty[0] & /*counties*/ 8 && path_1_class_value !== (path_1_class_value = "" + (null_to_empty(/*desoto*/ ctx[42] ? "desoto" : "county") + " svelte-jipw3q"))) {
+				attr(path_1, "class", path_1_class_value);
+			}
+
+			if (dirty[0] & /*counties, step*/ 9 && path_1_stroke_opacity_value !== (path_1_stroke_opacity_value = /*desoto*/ ctx[42]
+			? 1
+			: /*shelby*/ ctx[43] && /*step*/ ctx[0] == 1
+				? 1
+				: /*step*/ ctx[0] < 2 ? 0 : 1)) {
+				attr(path_1, "stroke-opacity", path_1_stroke_opacity_value);
+			}
+
+			if (dirty[0] & /*counties, step*/ 9 && path_1_fill_opacity_value !== (path_1_fill_opacity_value = /*desoto*/ ctx[42]
+			? 1
+			: /*shelby*/ ctx[43] && /*step*/ ctx[0] == 1
+				? 1
+				: /*step*/ ctx[0] < 2 ? 0 : 1)) {
+				attr(path_1, "fill-opacity", path_1_fill_opacity_value);
+			}
+
+			if (dirty[0] & /*counties, color*/ 12 && path_1_fill_value !== (path_1_fill_value = /*desoto*/ ctx[42]
+			? "gold"
+			: /*feature*/ ctx[39].properties.movednet == 0
+				? "#D3D3D3"
+				: /*color*/ ctx[2](/*feature*/ ctx[39].properties.movednet))) {
 				attr(path_1, "fill", path_1_fill_value);
 			}
 		},
@@ -4997,63 +5298,40 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (165:8) {#each counties.filter((county) => county.id == "28033") as feature, i}
-function create_each_block_1(ctx) {
+// (224:8) {#each states as feature, i}
+function create_each_block_2(ctx) {
 	let path_1;
 	let path_1_d_value;
-	let mounted;
-	let dispose;
-
-	function mouseover_handler_1(...args) {
-		return /*mouseover_handler_1*/ ctx[20](/*feature*/ ctx[36], ...args);
-	}
 
 	return {
 		c() {
 			path_1 = svg_element("path");
-			attr(path_1, "d", path_1_d_value = /*path*/ ctx[4](/*feature*/ ctx[36]));
-			attr(path_1, "id", "desoto");
-			attr(path_1, "fill", "gold");
-			attr(path_1, "role", "tooltip");
-			attr(path_1, "class", "svelte-bmp9je");
+			attr(path_1, "d", path_1_d_value = /*path*/ ctx[5](/*feature*/ ctx[39]));
+			attr(path_1, "class", "state svelte-jipw3q");
+			attr(path_1, "fill", "none");
 		},
 		m(target, anchor) {
 			insert(target, path_1, anchor);
-
-			if (!mounted) {
-				dispose = [
-					listen(path_1, "mouseover", mouseover_handler_1),
-					listen(path_1, "mousemove", function () {
-						if (is_function(/*handleMousemove*/ ctx[16](/*feature*/ ctx[36]))) /*handleMousemove*/ ctx[16](/*feature*/ ctx[36]).apply(this, arguments);
-					})
-				];
-
-				mounted = true;
-			}
 		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-
-			if (dirty[0] & /*path, counties*/ 24 && path_1_d_value !== (path_1_d_value = /*path*/ ctx[4](/*feature*/ ctx[36]))) {
+		p(ctx, dirty) {
+			if (dirty[0] & /*path, states*/ 48 && path_1_d_value !== (path_1_d_value = /*path*/ ctx[5](/*feature*/ ctx[39]))) {
 				attr(path_1, "d", path_1_d_value);
 			}
 		},
 		d(detaching) {
 			if (detaching) detach(path_1);
-			mounted = false;
-			run_all(dispose);
 		}
 	};
 }
 
-// (178:4) {#if highlight_props}
-function create_if_block$2(ctx) {
+// (229:4) {#if highlight_props}
+function create_if_block_1$2(ctx) {
 	let g;
-	let each_value = /*counties*/ ctx[3].filter(/*func_3*/ ctx[21]);
+	let each_value_1 = /*counties*/ ctx[3].filter(/*func_1*/ ctx[19]);
 	let each_blocks = [];
 
-	for (let i = 0; i < each_value.length; i += 1) {
-		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+	for (let i = 0; i < each_value_1.length; i += 1) {
+		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
 	}
 
 	return {
@@ -5074,230 +5352,8 @@ function create_if_block$2(ctx) {
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*counties, highlight_props, point_elements*/ 104) {
-				each_value = /*counties*/ ctx[3].filter(/*func_3*/ ctx[21]);
-				let i;
-
-				for (i = 0; i < each_value.length; i += 1) {
-					const child_ctx = get_each_context$1(ctx, each_value, i);
-
-					if (each_blocks[i]) {
-						each_blocks[i].p(child_ctx, dirty);
-					} else {
-						each_blocks[i] = create_each_block$1(child_ctx);
-						each_blocks[i].c();
-						each_blocks[i].m(g, null);
-					}
-				}
-
-				for (; i < each_blocks.length; i += 1) {
-					each_blocks[i].d(1);
-				}
-
-				each_blocks.length = each_value.length;
-			}
-		},
-		d(detaching) {
-			if (detaching) detach(g);
-			destroy_each(each_blocks, detaching);
-		}
-	};
-}
-
-// (180:12) {#each counties.filter((county) => county.id in highlight_props) as county, index}
-function create_each_block$1(ctx) {
-	let circle;
-	let circle_cx_value;
-	let circle_cy_value;
-	let county = /*county*/ ctx[33];
-	const assign_circle = () => /*circle_binding*/ ctx[22](circle, county);
-	const unassign_circle = () => /*circle_binding*/ ctx[22](null, county);
-
-	return {
-		c() {
-			circle = svg_element("circle");
-			attr(circle, "cx", circle_cx_value = /*county*/ ctx[33].properties.point[0]);
-			attr(circle, "cy", circle_cy_value = /*county*/ ctx[33].properties.point[1]);
-			attr(circle, "r", "0");
-		},
-		m(target, anchor) {
-			insert(target, circle, anchor);
-			assign_circle();
-		},
-		p(new_ctx, dirty) {
-			ctx = new_ctx;
-
-			if (dirty[0] & /*counties, highlight_props*/ 72 && circle_cx_value !== (circle_cx_value = /*county*/ ctx[33].properties.point[0])) {
-				attr(circle, "cx", circle_cx_value);
-			}
-
-			if (dirty[0] & /*counties, highlight_props*/ 72 && circle_cy_value !== (circle_cy_value = /*county*/ ctx[33].properties.point[1])) {
-				attr(circle, "cy", circle_cy_value);
-			}
-
-			if (county !== /*county*/ ctx[33]) {
-				unassign_circle();
-				county = /*county*/ ctx[33];
-				assign_circle();
-			}
-		},
-		d(detaching) {
-			if (detaching) detach(circle);
-			unassign_circle();
-		}
-	};
-}
-
-function create_fragment$3(ctx) {
-	let t;
-	let svg;
-	let g;
-	let each1_anchor;
-	let svg_viewBox_value;
-	let current;
-	let mounted;
-	let dispose;
-	let each_value_3 = Object.entries(/*point_elements*/ ctx[5]);
-	let each_blocks_2 = [];
-
-	for (let i = 0; i < each_value_3.length; i += 1) {
-		each_blocks_2[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
-	}
-
-	const out = i => transition_out(each_blocks_2[i], 1, 1, () => {
-		each_blocks_2[i] = null;
-	});
-
-	let each_value_2 = /*counties*/ ctx[3].filter(func_1);
-	let each_blocks_1 = [];
-
-	for (let i = 0; i < each_value_2.length; i += 1) {
-		each_blocks_1[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
-	}
-
-	let each_value_1 = /*counties*/ ctx[3].filter(func_2);
-	let each_blocks = [];
-
-	for (let i = 0; i < each_value_1.length; i += 1) {
-		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
-	}
-
-	let if_block = /*highlight_props*/ ctx[6] && create_if_block$2(ctx);
-
-	return {
-		c() {
-			for (let i = 0; i < each_blocks_2.length; i += 1) {
-				each_blocks_2[i].c();
-			}
-
-			t = space();
-			svg = svg_element("svg");
-			g = svg_element("g");
-
-			for (let i = 0; i < each_blocks_1.length; i += 1) {
-				each_blocks_1[i].c();
-			}
-
-			each1_anchor = empty();
-
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				each_blocks[i].c();
-			}
-
-			if (if_block) if_block.c();
-			attr(svg, "id", "map");
-			attr(svg, "viewBox", svg_viewBox_value = "" + (/*$ox*/ ctx[7] + " " + /*$oy*/ ctx[8] + " " + /*$w*/ ctx[9] + " " + /*$h*/ ctx[10]));
-		},
-		m(target, anchor) {
-			for (let i = 0; i < each_blocks_2.length; i += 1) {
-				if (each_blocks_2[i]) {
-					each_blocks_2[i].m(target, anchor);
-				}
-			}
-
-			insert(target, t, anchor);
-			insert(target, svg, anchor);
-			append$1(svg, g);
-
-			for (let i = 0; i < each_blocks_1.length; i += 1) {
-				if (each_blocks_1[i]) {
-					each_blocks_1[i].m(g, null);
-				}
-			}
-
-			append$1(g, each1_anchor);
-
-			for (let i = 0; i < each_blocks.length; i += 1) {
-				if (each_blocks[i]) {
-					each_blocks[i].m(g, null);
-				}
-			}
-
-			if (if_block) if_block.m(svg, null);
-			current = true;
-
-			if (!mounted) {
-				dispose = [
-					listen(svg, "mouseout", /*mouseout_handler*/ ctx[23]),
-					listen(svg, "blur", /*blur_handler*/ ctx[24])
-				];
-
-				mounted = true;
-			}
-		},
-		p(ctx, dirty) {
-			if (dirty[0] & /*color, point_elements, ox, step, sticky, highlight_props, counties*/ 2159) {
-				each_value_3 = Object.entries(/*point_elements*/ ctx[5]);
-				let i;
-
-				for (i = 0; i < each_value_3.length; i += 1) {
-					const child_ctx = get_each_context_3(ctx, each_value_3, i);
-
-					if (each_blocks_2[i]) {
-						each_blocks_2[i].p(child_ctx, dirty);
-						transition_in(each_blocks_2[i], 1);
-					} else {
-						each_blocks_2[i] = create_each_block_3(child_ctx);
-						each_blocks_2[i].c();
-						transition_in(each_blocks_2[i], 1);
-						each_blocks_2[i].m(t.parentNode, t);
-					}
-				}
-
-				group_outros();
-
-				for (i = each_value_3.length; i < each_blocks_2.length; i += 1) {
-					out(i);
-				}
-
-				check_outros();
-			}
-
-			if (dirty[0] & /*path, counties, color, dispatch, handleMousemove*/ 98332) {
-				each_value_2 = /*counties*/ ctx[3].filter(func_1);
-				let i;
-
-				for (i = 0; i < each_value_2.length; i += 1) {
-					const child_ctx = get_each_context_2(ctx, each_value_2, i);
-
-					if (each_blocks_1[i]) {
-						each_blocks_1[i].p(child_ctx, dirty);
-					} else {
-						each_blocks_1[i] = create_each_block_2(child_ctx);
-						each_blocks_1[i].c();
-						each_blocks_1[i].m(g, each1_anchor);
-					}
-				}
-
-				for (; i < each_blocks_1.length; i += 1) {
-					each_blocks_1[i].d(1);
-				}
-
-				each_blocks_1.length = each_value_2.length;
-			}
-
-			if (dirty[0] & /*path, counties, dispatch, handleMousemove*/ 98328) {
-				each_value_1 = /*counties*/ ctx[3].filter(func_2);
+			if (dirty[0] & /*counties, highlight_props, point_elements*/ 200) {
+				each_value_1 = /*counties*/ ctx[3].filter(/*func_1*/ ctx[19]);
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -5318,56 +5374,481 @@ function create_fragment$3(ctx) {
 
 				each_blocks.length = each_value_1.length;
 			}
+		},
+		d(detaching) {
+			if (detaching) detach(g);
+			destroy_each(each_blocks, detaching);
+		}
+	};
+}
 
-			if (/*highlight_props*/ ctx[6]) {
-				if (if_block) {
-					if_block.p(ctx, dirty);
-				} else {
-					if_block = create_if_block$2(ctx);
-					if_block.c();
-					if_block.m(svg, null);
-				}
-			} else if (if_block) {
-				if_block.d(1);
-				if_block = null;
+// (231:12) {#each counties.filter((county) => highlight_props                     .map((x) => x.id)                     .includes(county.id)) as county, index}
+function create_each_block_1(ctx) {
+	let circle;
+	let circle_cx_value;
+	let circle_cy_value;
+	let county = /*county*/ ctx[36];
+	const assign_circle = () => /*circle_binding*/ ctx[20](circle, county);
+	const unassign_circle = () => /*circle_binding*/ ctx[20](null, county);
+
+	return {
+		c() {
+			circle = svg_element("circle");
+			attr(circle, "cx", circle_cx_value = /*county*/ ctx[36].properties.point[0]);
+			attr(circle, "cy", circle_cy_value = /*county*/ ctx[36].properties.point[1]);
+			attr(circle, "r", "0");
+		},
+		m(target, anchor) {
+			insert(target, circle, anchor);
+			assign_circle();
+		},
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+
+			if (dirty[0] & /*counties, highlight_props*/ 136 && circle_cx_value !== (circle_cx_value = /*county*/ ctx[36].properties.point[0])) {
+				attr(circle, "cx", circle_cx_value);
 			}
 
-			if (!current || dirty[0] & /*$ox, $oy, $w, $h*/ 1920 && svg_viewBox_value !== (svg_viewBox_value = "" + (/*$ox*/ ctx[7] + " " + /*$oy*/ ctx[8] + " " + /*$w*/ ctx[9] + " " + /*$h*/ ctx[10]))) {
-				attr(svg, "viewBox", svg_viewBox_value);
+			if (dirty[0] & /*counties, highlight_props*/ 136 && circle_cy_value !== (circle_cy_value = /*county*/ ctx[36].properties.point[1])) {
+				attr(circle, "cy", circle_cy_value);
+			}
+
+			if (county !== /*county*/ ctx[36]) {
+				unassign_circle();
+				county = /*county*/ ctx[36];
+				assign_circle();
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(circle);
+			unassign_circle();
+		}
+	};
+}
+
+// (245:0) {#if highlight_props}
+function create_if_block$2(ctx) {
+	let each_1_anchor;
+	let current;
+	let each_value = /*highlight_props*/ ctx[7];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value.length; i += 1) {
+		each_blocks[i] = create_each_block$1(get_each_context$1(ctx, each_value, i));
+	}
+
+	const out = i => transition_out(each_blocks[i], 1, 1, () => {
+		each_blocks[i] = null;
+	});
+
+	return {
+		c() {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			each_1_anchor = empty();
+		},
+		m(target, anchor) {
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				if (each_blocks[i]) {
+					each_blocks[i].m(target, anchor);
+				}
+			}
+
+			insert(target, each_1_anchor, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*color, point_elements, highlight_props, ox, step, sticky, counties*/ 4303) {
+				each_value = /*highlight_props*/ ctx[7];
+				let i;
+
+				for (i = 0; i < each_value.length; i += 1) {
+					const child_ctx = get_each_context$1(ctx, each_value, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+						transition_in(each_blocks[i], 1);
+					} else {
+						each_blocks[i] = create_each_block$1(child_ctx);
+						each_blocks[i].c();
+						transition_in(each_blocks[i], 1);
+						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+					}
+				}
+
+				group_outros();
+
+				for (i = each_value.length; i < each_blocks.length; i += 1) {
+					out(i);
+				}
+
+				check_outros();
 			}
 		},
 		i(local) {
 			if (current) return;
 
-			for (let i = 0; i < each_value_3.length; i += 1) {
-				transition_in(each_blocks_2[i]);
+			for (let i = 0; i < each_value.length; i += 1) {
+				transition_in(each_blocks[i]);
 			}
 
 			current = true;
 		},
 		o(local) {
-			each_blocks_2 = each_blocks_2.filter(Boolean);
+			each_blocks = each_blocks.filter(Boolean);
 
-			for (let i = 0; i < each_blocks_2.length; i += 1) {
-				transition_out(each_blocks_2[i]);
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				transition_out(each_blocks[i]);
 			}
 
 			current = false;
 		},
 		d(detaching) {
-			destroy_each(each_blocks_2, detaching);
-			if (detaching) detach(t);
-			if (detaching) detach(svg);
-			destroy_each(each_blocks_1, detaching);
 			destroy_each(each_blocks, detaching);
-			if (if_block) if_block.d();
-			mounted = false;
-			run_all(dispose);
+			if (detaching) detach(each_1_anchor);
 		}
 	};
 }
-const func_1 = county => county.id != "28033";
-const func_2 = county => county.id == "28033";
+
+// (246:4) {#each highlight_props as props}
+function create_each_block$1(ctx) {
+	let highlight;
+	let current;
+
+	function func_2(...args) {
+		return /*func_2*/ ctx[22](/*props*/ ctx[32], ...args);
+	}
+
+	highlight = new Highlight({
+			props: {
+				color: /*color*/ ctx[2],
+				p: /*ele*/ ctx[33],
+				ox: /*ox*/ ctx[12],
+				step: /*step*/ ctx[0],
+				sticky: /*sticky*/ ctx[1],
+				opt_name: /*props*/ ctx[32].name
+				? /*props*/ ctx[32].name
+				: undefined,
+				style: /*props*/ ctx[32].style
+				? /*props*/ ctx[32].style
+				: undefined,
+				init_ox: /*props*/ ctx[32].init_ox || /*props*/ ctx[32].init_ox == 0
+				? /*props*/ ctx[32].init_ox
+				: undefined,
+				init_step: /*props*/ ctx[32].init_step
+				? /*props*/ ctx[32].init_step
+				: undefined,
+				angle: /*props*/ ctx[32].angle
+				? /*props*/ ctx[32].angle
+				: undefined,
+				line_width: /*props*/ ctx[32].line_width
+				? /*props*/ ctx[32].line_width
+				: undefined,
+				prefix: /*props*/ ctx[32].prefix
+				? /*props*/ ctx[32].prefix
+				: undefined,
+				props: /*counties*/ ctx[3].filter(func_2)[0].properties
+			}
+		});
+
+	return {
+		c() {
+			create_component(highlight.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(highlight, target, anchor);
+			current = true;
+		},
+		p(new_ctx, dirty) {
+			ctx = new_ctx;
+			const highlight_changes = {};
+			if (dirty[0] & /*color*/ 4) highlight_changes.color = /*color*/ ctx[2];
+			if (dirty[0] & /*point_elements, highlight_props*/ 192) highlight_changes.p = /*ele*/ ctx[33];
+			if (dirty[0] & /*step*/ 1) highlight_changes.step = /*step*/ ctx[0];
+			if (dirty[0] & /*sticky*/ 2) highlight_changes.sticky = /*sticky*/ ctx[1];
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.opt_name = /*props*/ ctx[32].name
+			? /*props*/ ctx[32].name
+			: undefined;
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.style = /*props*/ ctx[32].style
+			? /*props*/ ctx[32].style
+			: undefined;
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.init_ox = /*props*/ ctx[32].init_ox || /*props*/ ctx[32].init_ox == 0
+			? /*props*/ ctx[32].init_ox
+			: undefined;
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.init_step = /*props*/ ctx[32].init_step
+			? /*props*/ ctx[32].init_step
+			: undefined;
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.angle = /*props*/ ctx[32].angle
+			? /*props*/ ctx[32].angle
+			: undefined;
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.line_width = /*props*/ ctx[32].line_width
+			? /*props*/ ctx[32].line_width
+			: undefined;
+
+			if (dirty[0] & /*highlight_props*/ 128) highlight_changes.prefix = /*props*/ ctx[32].prefix
+			? /*props*/ ctx[32].prefix
+			: undefined;
+
+			if (dirty[0] & /*counties, highlight_props*/ 136) highlight_changes.props = /*counties*/ ctx[3].filter(func_2)[0].properties;
+			highlight.$set(highlight_changes);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(highlight.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(highlight.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(highlight, detaching);
+		}
+	};
+}
+
+function create_fragment$3(ctx) {
+	let svg;
+	let g;
+	let each0_anchor;
+	let each1_anchor;
+	let svg_viewBox_value;
+	let t;
+	let if_block1_anchor;
+	let current;
+	let mounted;
+	let dispose;
+	let each_value_4 = /*states*/ ctx[4].filter(func);
+	let each_blocks_2 = [];
+
+	for (let i = 0; i < each_value_4.length; i += 1) {
+		each_blocks_2[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
+	}
+
+	let each_value_3 = /*counties*/ ctx[3];
+	let each_blocks_1 = [];
+
+	for (let i = 0; i < each_value_3.length; i += 1) {
+		each_blocks_1[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
+	}
+
+	let each_value_2 = /*states*/ ctx[4];
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_2.length; i += 1) {
+		each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+	}
+
+	let if_block0 = /*highlight_props*/ ctx[7] && create_if_block_1$2(ctx);
+	let if_block1 = /*highlight_props*/ ctx[7] && create_if_block$2(ctx);
+
+	return {
+		c() {
+			svg = svg_element("svg");
+			g = svg_element("g");
+
+			for (let i = 0; i < each_blocks_2.length; i += 1) {
+				each_blocks_2[i].c();
+			}
+
+			each0_anchor = empty();
+
+			for (let i = 0; i < each_blocks_1.length; i += 1) {
+				each_blocks_1[i].c();
+			}
+
+			each1_anchor = empty();
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			if (if_block0) if_block0.c();
+			t = space();
+			if (if_block1) if_block1.c();
+			if_block1_anchor = empty();
+			attr(svg, "id", "map");
+			attr(svg, "viewBox", svg_viewBox_value = "" + (/*$ox*/ ctx[8] + " " + /*$oy*/ ctx[9] + " " + /*$w*/ ctx[10] + " " + /*$h*/ ctx[11]));
+		},
+		m(target, anchor) {
+			insert(target, svg, anchor);
+			append$1(svg, g);
+
+			for (let i = 0; i < each_blocks_2.length; i += 1) {
+				if (each_blocks_2[i]) {
+					each_blocks_2[i].m(g, null);
+				}
+			}
+
+			append$1(g, each0_anchor);
+
+			for (let i = 0; i < each_blocks_1.length; i += 1) {
+				if (each_blocks_1[i]) {
+					each_blocks_1[i].m(g, null);
+				}
+			}
+
+			append$1(g, each1_anchor);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				if (each_blocks[i]) {
+					each_blocks[i].m(g, null);
+				}
+			}
+
+			if (if_block0) if_block0.m(svg, null);
+			insert(target, t, anchor);
+			if (if_block1) if_block1.m(target, anchor);
+			insert(target, if_block1_anchor, anchor);
+			current = true;
+
+			if (!mounted) {
+				dispose = listen(svg, "mouseout", /*mouseout_handler*/ ctx[21]);
+				mounted = true;
+			}
+		},
+		p(ctx, dirty) {
+			if (dirty[0] & /*path, states, step*/ 49) {
+				each_value_4 = /*states*/ ctx[4].filter(func);
+				let i;
+
+				for (i = 0; i < each_value_4.length; i += 1) {
+					const child_ctx = get_each_context_4(ctx, each_value_4, i);
+
+					if (each_blocks_2[i]) {
+						each_blocks_2[i].p(child_ctx, dirty);
+					} else {
+						each_blocks_2[i] = create_each_block_4(child_ctx);
+						each_blocks_2[i].c();
+						each_blocks_2[i].m(g, each0_anchor);
+					}
+				}
+
+				for (; i < each_blocks_2.length; i += 1) {
+					each_blocks_2[i].d(1);
+				}
+
+				each_blocks_2.length = each_value_4.length;
+			}
+
+			if (dirty[0] & /*path, counties, step, color, dispatch, handleMousemove*/ 196653) {
+				each_value_3 = /*counties*/ ctx[3];
+				let i;
+
+				for (i = 0; i < each_value_3.length; i += 1) {
+					const child_ctx = get_each_context_3(ctx, each_value_3, i);
+
+					if (each_blocks_1[i]) {
+						each_blocks_1[i].p(child_ctx, dirty);
+					} else {
+						each_blocks_1[i] = create_each_block_3(child_ctx);
+						each_blocks_1[i].c();
+						each_blocks_1[i].m(g, each1_anchor);
+					}
+				}
+
+				for (; i < each_blocks_1.length; i += 1) {
+					each_blocks_1[i].d(1);
+				}
+
+				each_blocks_1.length = each_value_3.length;
+			}
+
+			if (dirty[0] & /*path, states*/ 48) {
+				each_value_2 = /*states*/ ctx[4];
+				let i;
+
+				for (i = 0; i < each_value_2.length; i += 1) {
+					const child_ctx = get_each_context_2(ctx, each_value_2, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_2(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(g, null);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_2.length;
+			}
+
+			if (/*highlight_props*/ ctx[7]) {
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
+				} else {
+					if_block0 = create_if_block_1$2(ctx);
+					if_block0.c();
+					if_block0.m(svg, null);
+				}
+			} else if (if_block0) {
+				if_block0.d(1);
+				if_block0 = null;
+			}
+
+			if (!current || dirty[0] & /*$ox, $oy, $w, $h*/ 3840 && svg_viewBox_value !== (svg_viewBox_value = "" + (/*$ox*/ ctx[8] + " " + /*$oy*/ ctx[9] + " " + /*$w*/ ctx[10] + " " + /*$h*/ ctx[11]))) {
+				attr(svg, "viewBox", svg_viewBox_value);
+			}
+
+			if (/*highlight_props*/ ctx[7]) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+
+					if (dirty[0] & /*highlight_props*/ 128) {
+						transition_in(if_block1, 1);
+					}
+				} else {
+					if_block1 = create_if_block$2(ctx);
+					if_block1.c();
+					transition_in(if_block1, 1);
+					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
+				}
+			} else if (if_block1) {
+				group_outros();
+
+				transition_out(if_block1, 1, 1, () => {
+					if_block1 = null;
+				});
+
+				check_outros();
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(if_block1);
+			current = true;
+		},
+		o(local) {
+			transition_out(if_block1);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(svg);
+			destroy_each(each_blocks_2, detaching);
+			destroy_each(each_blocks_1, detaching);
+			destroy_each(each_blocks, detaching);
+			if (if_block0) if_block0.d();
+			if (detaching) detach(t);
+			if (if_block1) if_block1.d(detaching);
+			if (detaching) detach(if_block1_anchor);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+const func = state => state.id == "28";
 
 function instance$3($$self, $$props, $$invalidate) {
 	let $ox;
@@ -5386,19 +5867,19 @@ function instance$3($$self, $$props, $$invalidate) {
 	let width = 100,
 		height = 100,
 		counties = [],
+		states = [],
 		path,
-		p,
 		point_elements = {},
 		highlight_props,
 		ox = tweened(598, tweenOptions),
-		oy = tweened(380, tweenOptions),
+		oy = tweened(376, tweenOptions),
 		w = tweened(20, tweenOptions),
 		h = tweened(20, tweenOptions);
 
-	component_subscribe($$self, ox, value => $$invalidate(7, $ox = value));
-	component_subscribe($$self, oy, value => $$invalidate(8, $oy = value));
-	component_subscribe($$self, w, value => $$invalidate(9, $w = value));
-	component_subscribe($$self, h, value => $$invalidate(10, $h = value));
+	component_subscribe($$self, ox, value => $$invalidate(8, $ox = value));
+	component_subscribe($$self, oy, value => $$invalidate(9, $oy = value));
+	component_subscribe($$self, w, value => $$invalidate(10, $w = value));
+	component_subscribe($$self, h, value => $$invalidate(11, $h = value));
 
 	function change_viewBox(new_ox, new_oy, new_w, new_h) {
 		ox.set(new_ox);
@@ -5417,7 +5898,7 @@ function instance$3($$self, $$props, $$invalidate) {
 		}
 
 		if (level == "local") {
-			change_viewBox(598, 380, 20, 20);
+			change_viewBox(598, 376, 20, 20);
 		}
 	}
 
@@ -5429,7 +5910,7 @@ function instance$3($$self, $$props, $$invalidate) {
 		const us = await fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/counties-albers-10m.json").then(d => d.json());
 		const flows = await fetch("https://cdn.jsdelivr.net/gh/coleschnell/portfolio_website@master/src/routes/scrollygraph/_assets/flow_15y.json").then(d => d.json());
 		geoAlbersUsa().fitSize([width, height], us);
-		$$invalidate(4, path = geoPath());
+		$$invalidate(5, path = geoPath());
 
 		$$invalidate(3, counties = feature(us, us.objects.counties).features.map(county => {
 			county.properties.movedin = flows.MOVEDIN[county.id] ? flows.MOVEDIN[county.id] : 0;
@@ -5446,10 +5927,64 @@ function instance$3($$self, $$props, $$invalidate) {
 			return county;
 		}));
 
-		$$invalidate(6, highlight_props = {
-			"28093": { angle: -10, len: 50, prefix: "2. " },
-			"47157": { angle: -100, len: 50, prefix: "1. " }
-		});
+		$$invalidate(4, states = feature(us, us.objects.states).features);
+
+		$$invalidate(7, highlight_props = [
+			{
+				id: "47157",
+				init_step: 1,
+				init_ox: 598,
+				style: "label"
+			},
+			{
+				id: "28033",
+				init_step: 1,
+				init_ox: 598,
+				style: "label"
+			},
+			{
+				id: "28137",
+				init_step: 1,
+				init_ox: 598,
+				style: "label",
+				name: "Mississippi"
+			},
+			{
+				id: "47157",
+				init_step: 2,
+				init_ox: 560,
+				angle: -165,
+				name: "1. Shelby County, Tenn."
+			},
+			{
+				id: "28027",
+				init_step: 2,
+				init_ox: 560,
+				angle: -165,
+				name: "2. Coahoma County, Miss."
+			},
+			{
+				id: "28143",
+				init_step: 2,
+				init_ox: 560,
+				angle: -25,
+				name: "3. Tunica County, Miss."
+			},
+			{
+				id: "28133",
+				init_step: 2,
+				init_ox: 560,
+				angle: -25,
+				name: "4. Sunflower County, Miss."
+			},
+			{
+				id: "34003",
+				init_step: 3,
+				init_ox: 0,
+				angle: -150,
+				name: "5. Bergen County, N.J."
+			}
+		]);
 	});
 
 	function handleMousemove(feature) {
@@ -5465,26 +6000,23 @@ function instance$3($$self, $$props, $$invalidate) {
 		};
 	}
 
-	const func = (id, county) => county.id == id;
-
 	const mouseover_handler = (feature, e) => dispatch("mousemove", {
 		e,
 		props: feature.properties,
 		id: feature.id
 	});
 
-	const mouseover_handler_1 = (feature, e) => dispatch("mousemove", { e, props: feature.properties });
-	const func_3 = county => county.id in highlight_props;
+	const func_1 = county => highlight_props.map(x => x.id).includes(county.id);
 
 	function circle_binding($$value, county) {
 		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
 			point_elements[county.id] = $$value;
-			$$invalidate(5, point_elements);
+			$$invalidate(6, point_elements);
 		});
 	}
 
 	const mouseout_handler = () => dispatch("mouseout");
-	const blur_handler = () => dispatch("mouseout");
+	const func_2 = (props, county) => county.id == props.id;
 
 	$$self.$$set = $$props => {
 		if ('step' in $$props) $$invalidate(0, step = $$props.step);
@@ -5495,16 +6027,16 @@ function instance$3($$self, $$props, $$invalidate) {
 	$$self.$$.update = () => {
 		if ($$self.$$.dirty[0] & /*step*/ 1) {
 			{
-				if (step == 2) {
-					zoom_level('us');
+				if (step == 3) {
+					zoom_level("us");
 				}
 
-				if (step == 1) {
-					zoom_level('midsouth');
+				if (step == 2) {
+					zoom_level("midsouth");
 				}
 
 				if (step == 0) {
-					zoom_level('local');
+					zoom_level("local");
 				}
 			}
 		}
@@ -5515,6 +6047,7 @@ function instance$3($$self, $$props, $$invalidate) {
 		sticky,
 		color,
 		counties,
+		states,
 		path,
 		point_elements,
 		highlight_props,
@@ -5528,14 +6061,11 @@ function instance$3($$self, $$props, $$invalidate) {
 		h,
 		dispatch,
 		handleMousemove,
-		p,
-		func,
 		mouseover_handler,
-		mouseover_handler_1,
-		func_3,
+		func_1,
 		circle_binding,
 		mouseout_handler,
-		blur_handler
+		func_2
 	];
 }
 
@@ -5557,7 +6087,7 @@ function create_if_block$1(ctx) {
 	let div;
 	let t;
 	let current;
-	let if_block0 = /*evt*/ ctx[0].detail.id != "28033" && create_if_block_2(ctx);
+	let if_block0 = /*evt*/ ctx[0].detail.id != "28033" && create_if_block_2$1(ctx);
 	let if_block1 = /*evt*/ ctx[0].detail.id == "28033" && create_if_block_1$1(ctx);
 
 	return {
@@ -5586,7 +6116,7 @@ function create_if_block$1(ctx) {
 						transition_in(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_2(ctx);
+					if_block0 = create_if_block_2$1(ctx);
 					if_block0.c();
 					transition_in(if_block0, 1);
 					if_block0.m(div, t);
@@ -5640,7 +6170,7 @@ function create_if_block$1(ctx) {
 }
 
 // (26:4) {#if evt.detail.id != "28033"}
-function create_if_block_2(ctx) {
+function create_if_block_2$1(ctx) {
 	let infoblurb;
 	let current;
 
@@ -6530,7 +7060,7 @@ var Sticky$1 = /*@__PURE__*/getDefaultExportFromCjs(stickyJs);
 /* src/routes/scrollygraph/+page.svelte generated by Svelte v3.59.2 */
 
 function add_css(target) {
-	append_styles(target, "svelte-41rbiz", "body{overflow-x:hidden}.spacer.svelte-41rbiz.svelte-41rbiz{height:40vh}section.svelte-41rbiz.svelte-41rbiz{width:100%;max-width:672px}.sticky.svelte-41rbiz.svelte-41rbiz{width:100%;max-width:672px;margin:0 !important}.section-container.svelte-41rbiz.svelte-41rbiz{margin-top:1em;text-align:center;transition:background 100ms;display:flex}.step.svelte-41rbiz.svelte-41rbiz{height:80vh;display:flex;place-items:center;justify-content:center}.step-content.svelte-41rbiz.svelte-41rbiz{background:whitesmoke;color:#ccc;border-radius:5px;padding:0.5rem 1rem;display:flex;flex-direction:column;justify-content:center;transition:background 500ms ease;box-shadow:1px 1px 10px rgba(0, 0, 0, 0.2);text-align:left;width:75%;margin:auto;max-width:500px}.step.active.svelte-41rbiz .step-content.svelte-41rbiz{background:white;color:black}.steps-container.svelte-41rbiz.svelte-41rbiz{height:100%}.sticky.svelte-41rbiz.svelte-41rbiz{height:100%}.steps-container.svelte-41rbiz.svelte-41rbiz{flex:1 1 40%}.section-container.svelte-41rbiz.svelte-41rbiz{flex-direction:column-reverse}.sticky.svelte-41rbiz.svelte-41rbiz{width:95%;margin:auto}");
+	append_styles(target, "svelte-2cu9hb", "body{overflow-x:hidden}.spacer.svelte-2cu9hb.svelte-2cu9hb{height:40vh}section.svelte-2cu9hb.svelte-2cu9hb{width:100%;max-width:672px}.sticky.svelte-2cu9hb.svelte-2cu9hb{width:100%;max-width:672px;margin:0 !important;position:relative}.section-container.svelte-2cu9hb.svelte-2cu9hb{margin-top:1em;text-align:center;transition:background 100ms;display:flex}.step.svelte-2cu9hb.svelte-2cu9hb{height:80vh;display:flex;place-items:center;justify-content:center}.step-content.svelte-2cu9hb.svelte-2cu9hb{background:whitesmoke;color:#ccc;border-radius:5px;padding:0.5rem 1rem;display:flex;flex-direction:column;justify-content:center;transition:background 500ms ease;box-shadow:1px 1px 10px rgba(0, 0, 0, 0.2);text-align:left;width:75%;margin:auto;max-width:500px}.step.active.svelte-2cu9hb .step-content.svelte-2cu9hb{background:white;color:black}.steps-container.svelte-2cu9hb.svelte-2cu9hb{height:100%}.sticky.svelte-2cu9hb.svelte-2cu9hb{height:100%}.steps-container.svelte-2cu9hb.svelte-2cu9hb{flex:1 1 40%}.section-container.svelte-2cu9hb.svelte-2cu9hb{flex-direction:column-reverse}.sticky.svelte-2cu9hb.svelte-2cu9hb{width:95%;margin:auto}");
 }
 
 function get_each_context(ctx, list, i) {
@@ -6540,8 +7070,8 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (46:20) {#if i != steps.length-1}
-function create_if_block_1(ctx) {
+// (45:20) {#if i != steps.length-1}
+function create_if_block_2(ctx) {
 	let div1;
 	let div0;
 	let raw_value = /*text*/ ctx[13] + "";
@@ -6550,8 +7080,8 @@ function create_if_block_1(ctx) {
 		c() {
 			div1 = element("div");
 			div0 = element("div");
-			attr(div0, "class", "step-content svelte-41rbiz");
-			attr(div1, "class", "step svelte-41rbiz");
+			attr(div0, "class", "step-content svelte-2cu9hb");
+			attr(div1, "class", "step svelte-2cu9hb");
 			toggle_class(div1, "active", /*value*/ ctx[0] === /*i*/ ctx[15]);
 		},
 		m(target, anchor) {
@@ -6570,10 +7100,10 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (45:16) {#each steps as text, i}
+// (44:16) {#each steps as text, i}
 function create_each_block(ctx) {
 	let if_block_anchor;
-	let if_block = /*i*/ ctx[15] != /*steps*/ ctx[6].length - 1 && create_if_block_1(ctx);
+	let if_block = /*i*/ ctx[15] != /*steps*/ ctx[6].length - 1 && create_if_block_2(ctx);
 
 	return {
 		c() {
@@ -6594,7 +7124,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (44:12) <Scrolly bind:value>
+// (43:12) <Scrolly bind:value>
 function create_default_slot(ctx) {
 	let t;
 	let div;
@@ -6613,7 +7143,7 @@ function create_default_slot(ctx) {
 
 			t = space();
 			div = element("div");
-			attr(div, "class", "spacer svelte-41rbiz");
+			attr(div, "class", "spacer svelte-2cu9hb");
 		},
 		m(target, anchor) {
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -6657,8 +7187,8 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (56:12) {#if hideTooltip !== true}
-function create_if_block(ctx) {
+// (55:12) {#if hideTooltip !== true}
+function create_if_block_1(ctx) {
 	let tooltip;
 	let current;
 
@@ -6697,6 +7227,43 @@ function create_if_block(ctx) {
 	};
 }
 
+// (58:12) {#if value > 1}
+function create_if_block(ctx) {
+	let legend;
+	let current;
+
+	legend = new Legend({
+			props: {
+				colorScale: /*color*/ ctx[5],
+				title: "Net movers",
+				tickFormat: "0"
+			}
+		});
+
+	return {
+		c() {
+			create_component(legend.$$.fragment);
+		},
+		m(target, anchor) {
+			mount_component(legend, target, anchor);
+			current = true;
+		},
+		p: noop$1,
+		i(local) {
+			if (current) return;
+			transition_in(legend.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(legend.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			destroy_component(legend, detaching);
+		}
+	};
+}
+
 function create_fragment(ctx) {
 	let section;
 	let div2;
@@ -6707,7 +7274,6 @@ function create_fragment(ctx) {
 	let t0;
 	let div1;
 	let t1;
-	let legend;
 	let t2;
 	let map;
 	let current;
@@ -6727,15 +7293,8 @@ function create_fragment(ctx) {
 
 	scrolly = new Scrolly({ props: scrolly_props });
 	binding_callbacks.push(() => bind(scrolly, 'value', scrolly_value_binding));
-	let if_block = /*hideTooltip*/ ctx[4] !== true && create_if_block(ctx);
-
-	legend = new Legend({
-			props: {
-				colorScale: /*color*/ ctx[5],
-				title: "Net movers",
-				tickFormat: "0"
-			}
-		});
+	let if_block0 = /*hideTooltip*/ ctx[4] !== true && create_if_block_1(ctx);
+	let if_block1 = /*value*/ ctx[0] > 1 && create_if_block(ctx);
 
 	map = new Map$1({
 			props: {
@@ -6756,19 +7315,19 @@ function create_fragment(ctx) {
 			create_component(scrolly.$$.fragment);
 			t0 = space();
 			div1 = element("div");
-			if (if_block) if_block.c();
+			if (if_block0) if_block0.c();
 			t1 = space();
-			create_component(legend.$$.fragment);
+			if (if_block1) if_block1.c();
 			t2 = space();
 			create_component(map.$$.fragment);
-			attr(div0, "class", "steps-container svelte-41rbiz");
+			attr(div0, "class", "steps-container svelte-2cu9hb");
 			set_style(div0, "z-index", /*value*/ ctx[0] != /*steps*/ ctx[6].length - 1 ? 10 : 0);
 			add_render_callback(() => /*div0_elementresize_handler*/ ctx[8].call(div0));
-			attr(div1, "class", "sticky svelte-41rbiz");
+			attr(div1, "class", "sticky svelte-2cu9hb");
 			attr(div1, "data-margin-top", "200");
-			attr(div2, "class", "section-container svelte-41rbiz");
+			attr(div2, "class", "section-container svelte-2cu9hb");
 			attr(div2, "data-sticky-container", "");
-			attr(section, "class", "svelte-41rbiz");
+			attr(section, "class", "svelte-2cu9hb");
 		},
 		m(target, anchor) {
 			insert(target, section, anchor);
@@ -6778,9 +7337,9 @@ function create_fragment(ctx) {
 			div0_resize_listener = add_iframe_resize_listener(div0, /*div0_elementresize_handler*/ ctx[8].bind(div0));
 			append$1(div2, t0);
 			append$1(div2, div1);
-			if (if_block) if_block.m(div1, null);
+			if (if_block0) if_block0.m(div1, null);
 			append$1(div1, t1);
-			mount_component(legend, div1, null);
+			if (if_block1) if_block1.m(div1, null);
 			append$1(div1, t2);
 			mount_component(map, div1, null);
 			/*div1_binding*/ ctx[11](div1);
@@ -6806,23 +7365,46 @@ function create_fragment(ctx) {
 			}
 
 			if (/*hideTooltip*/ ctx[4] !== true) {
-				if (if_block) {
-					if_block.p(ctx, dirty);
+				if (if_block0) {
+					if_block0.p(ctx, dirty);
 
 					if (dirty & /*hideTooltip*/ 16) {
-						transition_in(if_block, 1);
+						transition_in(if_block0, 1);
 					}
 				} else {
-					if_block = create_if_block(ctx);
-					if_block.c();
-					transition_in(if_block, 1);
-					if_block.m(div1, t1);
+					if_block0 = create_if_block_1(ctx);
+					if_block0.c();
+					transition_in(if_block0, 1);
+					if_block0.m(div1, t1);
 				}
-			} else if (if_block) {
+			} else if (if_block0) {
 				group_outros();
 
-				transition_out(if_block, 1, 1, () => {
-					if_block = null;
+				transition_out(if_block0, 1, 1, () => {
+					if_block0 = null;
+				});
+
+				check_outros();
+			}
+
+			if (/*value*/ ctx[0] > 1) {
+				if (if_block1) {
+					if_block1.p(ctx, dirty);
+
+					if (dirty & /*value*/ 1) {
+						transition_in(if_block1, 1);
+					}
+				} else {
+					if_block1 = create_if_block(ctx);
+					if_block1.c();
+					transition_in(if_block1, 1);
+					if_block1.m(div1, t2);
+				}
+			} else if (if_block1) {
+				group_outros();
+
+				transition_out(if_block1, 1, 1, () => {
+					if_block1 = null;
 				});
 
 				check_outros();
@@ -6836,15 +7418,15 @@ function create_fragment(ctx) {
 		i(local) {
 			if (current) return;
 			transition_in(scrolly.$$.fragment, local);
-			transition_in(if_block);
-			transition_in(legend.$$.fragment, local);
+			transition_in(if_block0);
+			transition_in(if_block1);
 			transition_in(map.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
 			transition_out(scrolly.$$.fragment, local);
-			transition_out(if_block);
-			transition_out(legend.$$.fragment, local);
+			transition_out(if_block0);
+			transition_out(if_block1);
 			transition_out(map.$$.fragment, local);
 			current = false;
 		},
@@ -6852,8 +7434,8 @@ function create_fragment(ctx) {
 			if (detaching) detach(section);
 			destroy_component(scrolly);
 			div0_resize_listener();
-			if (if_block) if_block.d();
-			destroy_component(legend);
+			if (if_block0) if_block0.d();
+			if (if_block1) if_block1.d();
 			destroy_component(map);
 			/*div1_binding*/ ctx[11](null);
 		}
@@ -6871,8 +7453,7 @@ function instance($$self, $$props, $$invalidate) {
 	const steps = [
 		"<p class=\"content__segment combx paywall__content\">DeSoto County, Mississippi –&nbsp;not quite Memphis, not quite Mississippi –&nbsp;has found a middle ground between Memphis and Mississippi, who are both struggling to garner population growth. DeSoto County is not. </p>",
 		"<p class=\"content__segment combx paywall__content\">DeSoto has nearly double in size since 2000. Whereas, Memphis' Shelby County has grown 1.3% and Mississippi as a whole has grown only 3.2%. </p>",
-		"<p class=\"content__segment combx paywall__content\">The U.S. Census Bureau's migration flows estimate where people are moving to and from. From 2005-2020, Shelby County was the biggest loser, with a net migration to DeSoto of 3,838. </p>",
-		"<p class=\"content__segment combx paywall__content\">A far second was Coahoma County, Mississippi, with a net migration of 516. </p>",
+		"<p class=\"content__segment combx paywall__content\">The U.S. Census Bureau's migration flows estimate where people are moving to and from. From 2005-2020, Shelby County was the biggest loser, with a net migration to DeSoto of 3,838. </p><p class=\"content__segment combx paywall__content\">A far second was Coahoma County, Mississippi, with a net migration of 516. </p>",
 		"<p class=\"content__segment combx paywall__content\">Strangely, Bergen County, where Newark is located and the largest county in New Jersey, has the fifth largest negative net migration. </p>",
 		"<p class=\"content__segment combx paywall__content\">Of the 15 year period, Shelby County saw the most the most net movers at the beginning with a net migration of 2,145 between 2005 and 2010. Shelby County residents moving to DeSoto slow until 2015, then it trend up for a few year before hitting a plateau where DeSoto netted about 250 to 300 Shelby County resident every year until 2020. </p>",
 		"<p class=\"content__segment combx paywall__content\">During this period,19,000 people moved between the bordering counties, not accounting for those who moved multiple times. </p>",
@@ -6906,12 +7487,6 @@ function instance($$self, $$props, $$invalidate) {
 			$$invalidate(1, sticky_element);
 		});
 	}
-
-	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*value*/ 1) {
-			console.log(value);
-		}
-	};
 
 	return [
 		value,
