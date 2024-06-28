@@ -1,7 +1,5 @@
 'use strict';
 
-require('$app/forms');
-
 function noop$1() { }
 const identity$4 = x => x;
 function assign(tar, src) {
@@ -5168,7 +5166,7 @@ function get_each_context_4(ctx, list, i) {
 	return child_ctx;
 }
 
-// (181:8) {#each states.filter((state) => state.id == "28") as feature, i}
+// (179:8) {#each states.filter((state) => state.id == "28") as feature, i}
 function create_each_block_4(ctx) {
 	let path_1;
 	let path_1_d_value;
@@ -5200,7 +5198,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (189:8) {#each counties as feature, i}
+// (187:8) {#each counties as feature, i}
 function create_each_block_3(ctx) {
 	let path_1;
 	let path_1_d_value;
@@ -5298,7 +5296,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (224:8) {#each states as feature, i}
+// (222:8) {#each states as feature, i}
 function create_each_block_2(ctx) {
 	let path_1;
 	let path_1_d_value;
@@ -5324,7 +5322,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (229:4) {#if highlight_props}
+// (227:4) {#if highlight_props}
 function create_if_block_1$2(ctx) {
 	let g;
 	let each_value_1 = /*counties*/ ctx[3].filter(/*func_1*/ ctx[19]);
@@ -5382,7 +5380,7 @@ function create_if_block_1$2(ctx) {
 	};
 }
 
-// (231:12) {#each counties.filter((county) => highlight_props                     .map((x) => x.id)                     .includes(county.id)) as county, index}
+// (229:12) {#each counties.filter((county) => highlight_props                     .map((x) => x.id)                     .includes(county.id)) as county, index}
 function create_each_block_1(ctx) {
 	let circle;
 	let circle_cx_value;
@@ -5426,7 +5424,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (245:0) {#if highlight_props}
+// (243:0) {#if highlight_props}
 function create_if_block$2(ctx) {
 	let each_1_anchor;
 	let current;
@@ -5512,7 +5510,7 @@ function create_if_block$2(ctx) {
 	};
 }
 
-// (246:4) {#each highlight_props as props}
+// (244:4) {#each highlight_props as props}
 function create_each_block$1(ctx) {
 	let highlight;
 	let current;
