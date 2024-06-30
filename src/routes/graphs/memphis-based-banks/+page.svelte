@@ -19,6 +19,8 @@
   // This example loads csv data as json using @rollup/plugin-dsv
   import data from './_data/deposits.csv';
 
+  console.log(data)
+
   /* --------------------------------------------
    * Set what is our x key to separate it from the other series
    */
@@ -67,6 +69,7 @@
     groupTo: zKey,
     valueTo: yKey
   });
+
 
   // Function to create an array of dates from 2014 to 2023 with June 30th
     function createDatesArray() {
