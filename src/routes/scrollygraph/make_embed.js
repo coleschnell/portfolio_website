@@ -1,4 +1,4 @@
-import Embed from "./_each/PopRaceChart.svelte";
+import Embed from "./_each/ScrollyMap.svelte";
 
 var div = document.createElement("div");
 var script = document.currentScript;
