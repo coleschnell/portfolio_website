@@ -7595,15 +7595,15 @@
 
     	const steps = [
     		'',
-    		'<p class="content__segment combx paywall__content">The U.S. Census Bureau\'s American Community Survey (ACS) measures migration flows. This includes what counties DeSoto residents are moving from and to.  The net migration or number of net movers is the number of people who moved to DeSoto minus the number of people left for a given county. All green mean</p>',
+    		'<p class="content__segment combx paywall__content">The U.S. Census Bureau\'s American Community Survey (ACS) measured county-to-county migration flows from 2006 to 2020. The net migration or number of net movers is the number of people who moved to a county minus the number of people left for another county.</p><p class="content__segment combx paywall__content">Green represents counties that DeSoto had positve net migration (or net movers) – more people moved from that county to DeSoto than moved to the county from DeSoto.</p>',
     		'<p class="content__segment combx paywall__content">Shelby County was the biggest loser, in terms of net migration to DeSoto. The Tennessee county had a net migration of about 19,190 to DeSoto, from 2006 to 2020.</p>',
-    		'<p class="content__segment combx paywall__content">The next four sum to... A far second was Coahoma County, Mississippi, which lost 2,580 net movers to DeSoto. </p>',
-    		'<p class="content__segment combx paywall__content">Strangely, Bergen County, where Newark is located and the largest county in New Jersey, had the fifth largest net migration in favor of DeSoto. </p>',
-    		'<p class="content__segment combx paywall__content">DeSoto is not so alluring that every local county has flocks of movers to DeSoto. For instance, college students seem to be leaving for college and not returning home to DeSoto after college. Total leavers, all pink mean</p>',
+    		'<p class="content__segment combx paywall__content">Shelby has a large lead on the next three with the most net movers. The next three counties, all in Mississippi, had a combined net migration of 7,370.</p>',
+    		'<p class="content__segment combx paywall__content">Over 1,000 miles away, Bergen County, where Newark is located and the largest county in New Jersey, had the fifth largest net migration in favor of DeSoto.</p>',
+    		'<p class="content__segment combx paywall__content">DeSoto is not so alluring that every local county has flocks of movers to DeSoto. For instance, college students seem to be leaving for college and not returning home to DeSoto after college.</p><p class="content__segment combx paywall__content">Pink represents counties that DeSoto had negative net migration (or net movers) – more people moved to that county from DeSoto than moved from the county to DeSoto.</p>',
     		'<p class="content__segment combx paywall__content">Oktibbeha County, where Mississippi State University is located, gained 4,025 residents from DeSoto and lost only 820 residents to DeSoto, gaining 3,205 net movers in the exchange.</p>',
     		'<p class="content__segment combx paywall__content">Davidson County, the second largest Tennessee county following Shelby County, attracted the second most net movers, gaining 2,300 residents from DeSoto over the 15 years.</p>',
-    		'<p class="content__segment combx paywall__content">Gainers 3-5</p>',
-    		'<p class="content__segment combx paywall__content">The farthest county.... International numbers</p>',
+    		'<p class="content__segment combx paywall__content">Marshall County had the third most negative net movers, exchanging 14,690 movers including leavers and comers. Whereas, the two following counties exchanged less than 2,000 residents each; nearly all were residents moved away from DeSoto.</p>',
+    		'<p class="content__segment combx paywall__content">The farthest domesitc county to have migration with DeSoto was Anchorage, Alaska. However, 1,520 moved to DeSoto from another country in the 15 years, compared to total domestic migration of 34,295.</p>',
     		''
     	];
 
