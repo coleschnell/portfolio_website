@@ -263,7 +263,7 @@
     }
 
     $: {
-        if (step == 1) {
+        if (step >= 1 && step <= 3) {
             zoom_level("midsouth");
         }
         if (step == 0) {
@@ -272,10 +272,10 @@
         if (step == 4) {
             zoom_level("us");
         }
-        if (step == 5) {
+        if (step >= 5 && step <= 8) {
             zoom_level("nashville");
         }
-        if (step == 9) {
+        if (step >= 9) {
             zoom_level("us");
         }
     }
@@ -372,11 +372,6 @@
         {/if}
     </svg>
 </div>
-{#if step == 10 && innerWidth > 1200}
-    <div class="more-info-text" style="top:{map_height}px">
-        (Hover on counties for more information.)
-    </div>
-{/if}
 
 {#if highlight_props}
     {#each highlight_props as props}

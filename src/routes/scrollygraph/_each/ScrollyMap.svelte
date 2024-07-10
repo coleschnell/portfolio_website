@@ -24,9 +24,9 @@
     '<p class="content__segment combx paywall__content">DeSoto is not so alluring that every local county has flocks of movers to DeSoto. For instance, college students seem to be leaving for college and not returning home to DeSoto after college.</p><p class="content__segment combx paywall__content">Pink represents counties that DeSoto had negative net migration (or net movers) – more people moved to that county from DeSoto than moved from the county to DeSoto.</p>',
     '<p class="content__segment combx paywall__content">Oktibbeha County, where Mississippi State University is located, gained 4,025 residents from DeSoto and lost only 820 residents to DeSoto, gaining 3,205 net movers in the exchange.</p>',
     '<p class="content__segment combx paywall__content">Davidson County, the second largest Tennessee county following Shelby County, attracted the second most net movers, gaining 2,300 residents from DeSoto over the 15 years.</p>',
-    '<p class="content__segment combx paywall__content">Marshall County had the third most negative net movers, exchanging 14,690 movers including leavers and comers. Whereas, the two following counties exchanged less than 2,000 residents each; nearly all were residents moved away from DeSoto.</p>',
+    '<p class="content__segment combx paywall__content">Marshall County had the third most negative net movers, exchanging 14,690 movers including leavers and comers. Whereas, the two following counties exchanged less than 2,000 residents each; nearly all were residents who moved away from DeSoto.</p>',
     '<p class="content__segment combx paywall__content">The farthest domestic county to have migration with DeSoto was Anchorage, Alaska. However, 1,520 net movers came to DeSoto from another country in the 15 years, compared to total domestic net migration of 34,295.</p>',
-    ''
+    '',
 ]
     let evt;
     let hideTooltip = true;
@@ -34,19 +34,16 @@
 </script>
 
 <section style="padding: 0;">
-    <div class="section-container" data-sticky-container style="margin: 0;">
-        <div class="steps-container" bind:clientHeight={steps_height} style="z-index:{value != steps.length-1 ? 10 : 0}">
+    <div class="section-container" data-sticky-container style="margin: 0; z-index:{value != steps.length-1 ? 10 : -10}">
+        <div class="steps-container" bind:clientHeight={steps_height} style="z-index:{value != steps.length-1 ? 10 : -10}">
             <Scrolly bind:value>
                 {#each steps as text, i}
-                    {#if i != steps.length-1}
-                    <div class="step" class:active={value === i}>
+                    <div class="step" class:active={value === i} style="visibility:{ i == steps.length-1 ? "hidden" : "visible"};">
                         {#if i != 0}
                         <div class="step-content">{@html text}</div>
                         {/if}
                     </div>
-                    {/if}
                 {/each}
-                <div class="spacer" />
             </Scrolly>
         </div>
         <div class="sticky" bind:this={sticky_element} data-margin-top="200">
@@ -102,6 +99,7 @@
         margin: 0 !important;
         position: relative;
         transition: top 1s;
+        z-index: 0;
         /* position: sticky;
       top: 0;
       left: 0; */
@@ -150,9 +148,7 @@
     .steps-container{
         height: 100%;
     }
-    .sticky {
-        height: 100%;
-    }
+
 
     .steps-container {
         flex: 1 1 40%;

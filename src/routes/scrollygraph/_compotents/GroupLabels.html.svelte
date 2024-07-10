@@ -37,7 +37,7 @@
        style="
        background-color: {$zGet(group)}; 
        "></div>
-  <div>{cap($z(group))}</div>
+  <div class="text" style="transform: translatey({$z(group) == "All other domestic counties" ? "-33px" : "0"});">{cap($z(group))}</div>
 
 </div>
 {/each}
@@ -59,9 +59,16 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
-    gap: 2px
+    align-items: flex-start;
+    gap: 5px;
   }
+
+  .text {
+    line-height: 1rem;
+    width: 90px;
+    transform: translatey(0%);
+  }
+
   .t20 {
     transform: translateY(var(--y-offset))translateX(var(--x-offset))translateY(calc(var(--overlap-offset) * -1));
   }
@@ -69,7 +76,7 @@
     transform: translateY(var(--y-offset))translateX(var(--x-offset))translateY(var(--overlap-offset));
   }
   .point {
-    transform: translatey(-1.5px);
+    transform: translatey(100%);
     width: 6px; 
     height: 6px; 
   }

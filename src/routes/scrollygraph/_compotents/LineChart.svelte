@@ -12,6 +12,9 @@
   import SharedTooltip from './SharedTooltip.html.svelte';
   import RecessionBars from './RecessionBars.svelte'
 
+  let footnote_height = 0, title_height = 0;
+
+
   // This example loads csv data as json using @rollup/plugin-dsv
   export let data;
   export let title = 'null';
@@ -25,7 +28,8 @@
   export let labels = true;
   export let yDomain = [null, null]
   export let title_position = 'left'
-  export let margin = { top: 0, right: 0, bottom: 100, left: 0 }
+  export let margin = { top: 0, right: 0, bottom: 0, left: 0 }
+
 
   data.forEach(x => {
     x.Date = x.Date + 86400000
@@ -105,6 +109,7 @@ const xticks = createDatesArray();
   .chart-container {
     width: 100%;
     height: 300px;
+    z-index: 20;
   }
 
 
@@ -130,9 +135,9 @@ const xticks = createDatesArray();
   }
 </style>
 
-<div class="chart-container" style="margin: {margin.top}px {margin.right}px {margin.bottom}px {margin.left}px;">
+<div class="chart-container" style="margin: {margin.top}px {margin.right}px {margin.bottom + footnote_height + title_height}px {margin.left}px;">
   {#if title !== 'null'}
-  <h3 class="chart-title" style="text-align: {title_position};">{title}</h3>
+  <h3 class="chart-title" style="text-align: {title_position};" bind:clientHeight={title_height}>{title}</h3>
   {/if}
   <LayerCake
     {padding}
@@ -175,7 +180,7 @@ const xticks = createDatesArray();
       />
     </Html>
   </LayerCake>
-  <div class="footnotes">
+  <div class="footnotes" bind:clientHeight={footnote_height}>
     {#if source !== 'null'}
     <div>Source: {source}</div>
     {/if}

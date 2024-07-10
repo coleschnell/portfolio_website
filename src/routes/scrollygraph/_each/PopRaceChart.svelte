@@ -78,6 +78,10 @@ onMount(async() => {
     font-family: 'Graphik Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
+  .footnotes, .legend{
+    transform: translateY(-40px);
+  }
+
   .legend-group{
     display: flex;
     gap: 5px;
@@ -97,6 +101,7 @@ onMount(async() => {
     flex-direction: column;
     justify-content: space-between;
     font-family: 'Graphik Web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 15px;
   }
 
 </style>
