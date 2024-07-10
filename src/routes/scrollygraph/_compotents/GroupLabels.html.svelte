@@ -64,7 +64,7 @@
   }
 
   .text {
-    line-height: 1rem;
+    line-height: 16px;
     width: 90px;
     transform: translatey(0%);
   }
