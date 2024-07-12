@@ -15,6 +15,8 @@
         sticky = new Sticky(".sticky");
     });
 
+    $: console.log(value)
+
     const steps = [
     '',
     '<p class="content__segment combx paywall__content">The U.S. Census Bureau\'s American Community Survey (ACS) measured county-to-county migration flows from 2006 to 2020. The net migration – or number of net movers – is the number of people who moved to a county minus the number of people left for another county.</p><p class="content__segment combx paywall__content">Green represents counties that DeSoto had positive net migration (or net movers) – more people moved from that county to DeSoto than moved to the county from DeSoto.</p>',
@@ -47,7 +49,7 @@
             </Scrolly>
         </div>
         <div class="sticky" bind:this={sticky_element} data-margin-top="200">
-            {#if hideTooltip !== true && value != 0}
+            {#if hideTooltip !== true && value == 10}
                 <Tooltip {evt} {color} />
             {/if}
             {#if value > 0}

@@ -7241,7 +7241,7 @@
     	return child_ctx;
     }
 
-    // (42:24) {#if i != 0}
+    // (44:24) {#if i != 0}
     function create_if_block_2(ctx) {
     	let div;
     	let raw_value = /*text*/ ctx[13] + "";
@@ -7262,7 +7262,7 @@
     	};
     }
 
-    // (40:16) {#each steps as text, i}
+    // (42:16) {#each steps as text, i}
     function create_each_block(ctx) {
     	let div;
     	let t;
@@ -7300,7 +7300,7 @@
     	};
     }
 
-    // (39:12) <Scrolly bind:value>
+    // (41:12) <Scrolly bind:value>
     function create_default_slot(ctx) {
     	let each_1_anchor;
     	let each_value = /*steps*/ ctx[6];
@@ -7358,7 +7358,7 @@
     	};
     }
 
-    // (50:12) {#if hideTooltip !== true && value != 0}
+    // (52:12) {#if hideTooltip !== true && value == 10}
     function create_if_block_1(ctx) {
     	let tooltip;
     	let current;
@@ -7398,7 +7398,7 @@
     	};
     }
 
-    // (53:12) {#if value > 0}
+    // (55:12) {#if value > 0}
     function create_if_block(ctx) {
     	let legend;
     	let current;
@@ -7466,7 +7466,7 @@
 
     	scrolly = new Scrolly({ props: scrolly_props });
     	binding_callbacks.push(() => bind(scrolly, 'value', scrolly_value_binding));
-    	let if_block0 = /*hideTooltip*/ ctx[4] !== true && /*value*/ ctx[0] != 0 && create_if_block_1(ctx);
+    	let if_block0 = /*hideTooltip*/ ctx[4] !== true && /*value*/ ctx[0] == 10 && create_if_block_1(ctx);
     	let if_block1 = /*value*/ ctx[0] > 0 && create_if_block(ctx);
 
     	map = new Map$1({
@@ -7556,7 +7556,7 @@
     				: -10);
     			}
 
-    			if (/*hideTooltip*/ ctx[4] !== true && /*value*/ ctx[0] != 0) {
+    			if (/*hideTooltip*/ ctx[4] !== true && /*value*/ ctx[0] == 10) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
 
@@ -7684,6 +7684,12 @@
     			$$invalidate(1, sticky_element);
     		});
     	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*value*/ 1) {
+    			console.log(value);
+    		}
+    	};
 
     	return [
     		value,
