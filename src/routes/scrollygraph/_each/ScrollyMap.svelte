@@ -27,7 +27,7 @@
     '<p class="content__segment combx paywall__content">Oktibbeha County, where Mississippi State University is located, gained 4,025 residents from DeSoto and lost only 820 residents to DeSoto, gaining 3,205 net movers in the exchange from 2006 to 2020.</p>',
     '<p class="content__segment combx paywall__content">Davidson County, the second-largest Tennessee county following Shelby, attracted the second-most net movers, gaining 2,300 residents from DeSoto over the 15 years studied.</p>',
     '<p class="content__segment combx paywall__content">Adjacent to DeSoto, Marshall County had the third-most negative net movers, exchanging 14,690 movers, including those who were leaving and those coming. Whereas, both farther away, the counties with the fourth- and fifth-most negative net movers exchanged less than 2,000 residents each; nearly all were residents who moved away from DeSoto.</p>',
-    '<p class="content__segment combx paywall__content">The farthest U.S. county to have migration with DeSoto was Anchorage, Alaska. However, 1,520 net movers came to DeSoto from other nations in the 15 years, compared to total domestic net migration of 34,295./p>',
+    '<p class="content__segment combx paywall__content">The farthest U.S. county to have migration with DeSoto was Anchorage, Alaska. However, 1,520 net movers came to DeSoto from other nations in the 15 years, compared to total domestic net migration of 34,295.</p>',
     '',
 ]
     let evt;
