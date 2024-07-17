@@ -48,7 +48,7 @@
                 {/each}
             </Scrolly>
         </div>
-        <div class="sticky" bind:this={sticky_element} data-margin-top="200" style="left: unset !important;">
+        <div class="sticky" bind:this={sticky_element} data-margin-top="300" style="left: unset !important;">
             {#if hideTooltip !== true && value == 10}
                 <Tooltip {evt} {color} />
             {/if}
