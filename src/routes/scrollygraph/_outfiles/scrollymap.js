@@ -7505,7 +7505,7 @@
     			add_render_callback(() => /*div0_elementresize_handler*/ ctx[8].call(div0));
     			attr(div1, "class", "source svelte-1vwlxi5");
     			attr(div2, "class", "sticky svelte-1vwlxi5");
-    			attr(div2, "data-margin-top", "200");
+    			attr(div2, "data-margin-top", "300");
     			set_style(div2, "left", "unset", 1);
     			attr(div3, "class", "section-container svelte-1vwlxi5");
     			attr(div3, "data-sticky-container", "");
