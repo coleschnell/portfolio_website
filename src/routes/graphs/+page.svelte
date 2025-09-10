@@ -37,17 +37,20 @@
 
 
 <div>
-<iframe
+
+<script src="/Users/cschnell/Documents/portfolio_website/src/routes/graphs/_outfiles/first_horizon.js"></script>
+
+<!---<iframe
     title="Untitled"
     id="chart"
     aria-label="Chart"
-    src="http://localhost:5173/graphs/memphis-based-banks"
+    src=""
     scrolling="no"
     frameborder="0"
     style="width: 0; min-width:100% !important; border: none;"
     height="400px"
     data-external="1"
-></iframe>
+></iframe>--->
 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Et illo, deserunt consequatur dignissimos blanditiis eaque tenetur provident illum error laboriosam cupiditate similique commodi ipsa voluptates ducimus magnam laudantium velit labore? Soluta dolorem ullam quidem iusto nobis, aspernatur dolor maxime, culpa numquam, id sit exercitationem odit enim quaerat asperiores impedit quas!
 </div>

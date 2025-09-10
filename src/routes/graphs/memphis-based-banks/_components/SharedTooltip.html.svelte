@@ -56,7 +56,14 @@
     transform: translate(-50%, -95%);
     z-index: 15;
     pointer-events: none;
+    box-shadow: none !important;
+    text-shadow:
+            1px 1px 0 #fff,
+            -1px 1px 0 #fff,
+            2px 0 0 #fff,
+            -2px 0 0 #fff;
   }
+
   .line {
     position: absolute;
     top: 0;
@@ -89,6 +96,7 @@
     height: 8px; 
     background-color: black; 
     border-radius: 50%;
+    transition: left 250ms ease-out, top 250ms ease-out;
   }
 </style>
 
